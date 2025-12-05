@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Stars } from "@react-three/drei";
 import { motion, useMotionValue, useMotionTemplate, animate } from "framer-motion";
-// import Industries from "./Industries";
+import {SmoothScrollHero} from "./DetailSection";
 
 const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
@@ -58,11 +58,11 @@ const HeroSection = () => {
         </Canvas>
       </div>
 
-       <div className="grid place-content-center px-4 py-24 text-yellow-50">
+       <div className="grid place-content-center px-4 py-16 mt-20 text-slate-300">
       <h1 className="max-w-2xl text-center text-4xl leading-snug">
-        Scale your{" "}
+        Shaping a World Powered by{" "}
         <span className="relative">
-          Marketing
+         Software.
           <svg
             viewBox="0 0 286 73"
             fill="none"
@@ -81,10 +81,11 @@ const HeroSection = () => {
             />
           </svg>
         </span>{" "}
-        with Simple AI Tools
+        
       </h1>
     </div>
     {/* <Industries /> */}
+    <SmoothScrollHero/>
     </motion.section>
   );
 };
