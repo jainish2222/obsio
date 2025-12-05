@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from '../../assets/obsio_black.png'
+import logo from '../../assets/obsio_white_t.png'
 // FIXED NAV DATA
 const NAV_ITEMS = [
   {
@@ -45,14 +45,15 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-transparent text-white p-4 z-50 mb-18">
+    <nav className="fixed top-0 left-0 w-full bg-transparent text-white p-4 z-50 mb-18 ">
       <div className="max-w-6xl mx-auto flex justify-between items-center py-2 px-4 md:px-0 relative z-20">
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center select-none">
           <img
             src={logo} alt="Obsio Logo"
-            className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 object-contain"
+            className="relative left-0 top-2 h-20 w-20 sm:h-20 sm:w-30 md:h-26 md:w-26 object-contain"
           />
+        {/* <h1>Obsio</h1> */}
         </div>
 
         {/* Desktop Menu */}
@@ -166,7 +167,7 @@ const FlyoutLink = ({ children, href, FlyoutContent }) => {
       onMouseLeave={() => setOpen(false)}
       className="relative w-fit h-fit"
     >
-      <a href={href} className="relative text-white">
+      <a href={href} className="relative text-white select-none">
         {children}
         <span
           style={{ transform: showFlyout ? "scaleX(1)" : "scaleX(0)" }}

@@ -88,28 +88,28 @@ const ParallaxImages = () => {
         alt="And example of a space launch"
          start={-200}
   end={200}
-        className="w-1/3"
+        className="w-1/3 select-none"
       />
       <ParallaxImg
       src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1vdW50YWlufGVufDB8fDB8fHww"
         alt="An example of a space launch"
          start={200}
   end={-250}
-        className="mx-auto w-2/3"
+        className="mx-auto w-2/3 select-none"
       />
       <ParallaxImg
         src="https://images.unsplash.com/photo-1645186296371-0b4efad96bdd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBpcmFtaWQlMjBwdXJwbGV8ZW58MHx8MHx8fDA%3D"
         alt="Orbiting satellite"
        start={-200}
   end={200}
-        className="ml-auto w-1/3"
+        className="ml-auto w-1/3 select-none"
       />
       <ParallaxImg
         src="https://images.unsplash.com/photo-1543847036-8e67e0c526f4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YXJjaGl0ZWN0dXJlJTIwYnVpbGRpbmd8ZW58MHx8MHx8fDA%3D"
         alt="Orbiting satellite"
         start={0}
   end={-500}
-        className="ml-24 w-5/12"
+        className="ml-24 w-5/12 select-none"
       />
     </div>
   );
@@ -154,35 +154,56 @@ const Schedule = () => {
         transition={{ ease: "easeInOut", duration: 0.75 }}
         className="mb-20 text-4xl font-black uppercase text-zinc-50"
       >
-        Launch Schedule
+        Our Services
       </motion.h1>
-      <ScheduleItem title="NG-21" date="Dec 9th" location="Florida" />
-      <ScheduleItem title="Starlink" date="Dec 20th" location="Texas" />
-      <ScheduleItem title="Starlink" date="Jan 13th" location="Florida" />
-      <ScheduleItem title="Turksat 6A" date="Feb 22nd" location="Florida" />
-      <ScheduleItem title="NROL-186" date="Mar 1st" location="California" />
-      <ScheduleItem title="GOES-U" date="Mar 8th" location="California" />
-      <ScheduleItem title="ASTRA 1P" date="Apr 8th" location="Texas" />
+<ScheduleItem 
+  title="Web Development" 
+  description="With 5+ years of experience, we craft high-quality web solutions across multiple industries. Our expertise spans banking software, automation tools, finance and Web3 platforms, insurance applications, and delivery platforms. We focus on creating scalable, secure, and visually engaging web experiences tailored to your business needs." 
+/>
+
+<ScheduleItem 
+  title="App Development" 
+  description="Our team has 3+ years of experience building robust mobile applications for diverse sectors. We develop medicine apps, delivery platforms, restaurant ordering systems, and educational apps. Each app is designed for performance, usability, and seamless integration, ensuring an exceptional user experience across devices." 
+/>
+
+<ScheduleItem 
+  title="UX/UI" 
+  description="With 5+ years of expertise in UX/UI design, we create intuitive and visually appealing interfaces that delight users. We combine modern design trends with usability best practices, delivering designs for web and mobile applications that drive engagement and enhance customer satisfaction across industries like healthcare, education, and e-commerce." 
+/>
+
+<ScheduleItem 
+  title="AI Solutions" 
+  description="Our AI team has 2+ years of experience building intelligent solutions such as AI chatbots, AI tutors, and AI-powered email template builders. We leverage machine learning and natural language processing to create systems that optimize business workflows, enhance customer interactions, and drive data-driven decision-making." 
+/>
+
+<ScheduleItem 
+  title="DevOps" 
+  description="With 3+ years of experience, our DevOps experts ensure seamless software delivery and infrastructure management. We work with top professionals from leading companies, implementing CI/CD pipelines, cloud deployments, and automation strategies that enhance efficiency, reliability, and scalability for complex enterprise systems." 
+/>
+
+<ScheduleItem 
+  title="IOT" 
+  description="With 1+ year of experience in IoT solutions, we develop smart systems for industries such as textile manufacturing, dining, and industrial automation. Our IoT applications optimize processes, monitor operations in real-time, and provide actionable insights, enabling businesses to operate smarter, safer, and more efficiently." 
+/>
+
+
     </section>
   );
 };
 
-const ScheduleItem = ({ title, date, location }) => {
+const ScheduleItem = ({ title, description }) => {
   return (
     <motion.div
       initial={{ y: 48, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       transition={{ ease: "easeInOut", duration: 0.75 }}
-      className="mb-9 flex items-center justify-between border-b border-zinc-800 px-3 pb-9"
+      className="mb-9 flex items-center justify-between border-b border-slate-300 px-3 pb-9"
     >
       <div>
-        <p className="mb-1.5 text-xl text-zinc-50">{title}</p>
-        <p className="text-sm uppercase text-zinc-500">{date}</p>
+        <p className="mb-1.5 text-xl text-zinc-50 font-bold">{title}</p>
+        <p className="text-sm  text-zinc-300">{description}</p>
       </div>
-      <div className="flex items-center gap-1.5 text-end text-sm uppercase text-zinc-500">
-        <p>{location}</p>
-        <FiMapPin />
-      </div>
+
     </motion.div>
   );
 };

@@ -1,10 +1,17 @@
+
 import React, { useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Stars } from "@react-three/drei";
 import { motion, useMotionValue, useMotionTemplate, animate } from "framer-motion";
 import {SmoothScrollHero} from "./DetailSection";
+import TechMenuGrid from "./TechstackSection"
+import {CustomKanban} from "./ProcessFlow"
+import {Example} from './ContactSection'
+import Footer from "./Footer"
+import Testimonials from "./Testimonials"
 
-const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
+const COLORS_TOP = ["#1F1F1F", "#2C2C2C", "#3A3A3A", "#4A4A4A"];
+
 
 const HeroSection = () => {
   const color = useMotionValue(COLORS_TOP[0]);
@@ -30,7 +37,7 @@ const HeroSection = () => {
       className="relative grid min-h-screen place-content-center overflow-hidden bg-gray-950 px-4 py-24 text-gray-200"
     >
       <div className="relative z-10 flex flex-col items-center pt-24">
-        <span className="mb-1.5 inline-block rounded-full bg-gray-600/50 px-3 py-1.5 text-sm">
+        <span className="mb-1.5 inline-block rounded-full bg-gray-600/50 px-3 py-1.5 text-sm select-none">
           Now Live!
         </span>
 
@@ -46,7 +53,7 @@ const HeroSection = () => {
           style={{ border, boxShadow }}
           whileHover={{ scale: 1.015 }}
           whileTap={{ scale: 0.985 }}
-          className="group flex items-center gap-1.5 rounded-full bg-gray-950/10 px-4 py-2 text-gray-50"
+          className="group flex items-center gap-1.5 rounded-full bg-gray-950/10 px-4 py-2 text-gray-50 select-none"
         >
           Contact Us →
         </motion.button>
@@ -54,7 +61,7 @@ const HeroSection = () => {
 
       <div className="absolute inset-0 z-0">
         <Canvas>
-          <Stars radius={50} count={2500} factor={4} fade speed={2} />
+          <Stars radius={50} count={10000} factor={4} fade speed={2} />
         </Canvas>
       </div>
 
@@ -86,6 +93,11 @@ const HeroSection = () => {
     </div>
     {/* <Industries /> */}
     <SmoothScrollHero/>
+    <TechMenuGrid/>
+    <CustomKanban/>
+    <Testimonials/>
+    <Example/>
+    <Footer/>
     </motion.section>
   );
 };
