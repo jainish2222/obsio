@@ -8,7 +8,7 @@ export const CustomKanban = () => {
     <div className="h-screen w-full overflow-hidden">
     <div className="grid place-content-center py-0 mb-1 ">
             <h2 className="inline-block text-center text-5xl text-white font-bold leading-none ">
-              {"Custom Kanban For Your Idea".split("").map((child, idx) => (
+              {"Custom Board For Your Idea".split("").map((child, idx) => (
                 <span className={styles.hoverText} key={idx}>
                   {child}
                 </span>

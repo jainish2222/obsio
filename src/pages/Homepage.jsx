@@ -1,13 +1,11 @@
-import Navbar from "../components/home/Navbar";
 import Hero from "../components/home/HeroSection";
-// import Industries from "../components/home/Industries";
 
 function Homepage() {
   return (
     <>
-      <Navbar />
+    <div className="no-scrollbar font-jura">
       <Hero />
-      {/* <Industries /> */}
+      </div>
     </>
   );
 }

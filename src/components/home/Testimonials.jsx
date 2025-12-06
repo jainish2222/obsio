@@ -1,150 +1,149 @@
-const items = [
-  {
-    text: "Contribute to the entire P-show project, covering frontend, backend, and deployment.",
-    img: "./img/backlog.png",
-    name: "Jainish Koladiya",
-    title: "Full stack developer and DevOps engineer",
-  },
-  {
-    text: "Assist with backend development and styling aspects of the P-show project.",
-    img: "./img/backlog.png",
-    name: "Mayank Zalavadiya",
-    title: "Full stack developer",
-  },
-  {
-    text: "Handle content writing and design contributions for the P-show project.",
-    img: "./img/backlog.png",
-    name: "Uttam Kheni",
-    title: "Python developer, designer and cybersecurity",
-  },
-  {
-    text: "Contribute to the functionality, problem-solving and management for the P-show project.",
-    img: "./img/backlog.png",
-    name: "Parth Kanani",
-    title: "iOS developer and good problem-solver",
-  },
-  {
-    text: "Contribute to the entire P-show project, covering frontend, backend, and deployment.",
-    img: "./img/backlog.png",
-    name: "Jainish Koladiya",
-    title: "Full stack developer and DevOps engineer",
-  },
-  {
-    text: "Assist with backend development and styling aspects of the P-show project.",
-    img: "./img/backlog.png",
-    name: "Mayank Zalavadiya",
-    title: "Full stack developer",
-  },
-  {
-    text: "Handle content writing and design contributions for the P-show project.",
-    img: "./img/backlog.png",
-    name: "Uttam Kheni",
-    title: "Python developer, designer and cybersecurity",
-  },
-  {
-    text: "Contribute to the functionality, problem-solving and management for the P-show project.",
-    img: "./img/backlog.png",
-    name: "Parth Kanani",
-    title: "iOS developer and good problem-solver",
-  },
-  {
-    text: "Contribute to the entire P-show project, covering frontend, backend, and deployment.",
-    img: "./img/backlog.png",
-    name: "Jainish Koladiya",
-    title: "Full stack developer and DevOps engineer",
-  },
-  {
-    text: "Assist with backend development and styling aspects of the P-show project.",
-    img: "./img/backlog.png",
-    name: "Mayank Zalavadiya",
-    title: "Full stack developer",
-  },
-  {
-    text: "Handle content writing and design contributions for the P-show project.",
-    img: "./img/backlog.png",
-    name: "Uttam Kheni",
-    title: "Python developer, designer and cybersecurity",
-  },
-  {
-    text: "Contribute to the functionality, problem-solving and management for the P-show project.",
-    img: "./img/backlog.png",
-    name: "Parth Kanani",
-    title: "iOS developer and good problem-solver",
-  },
-];("use client");
-import React from "react";
+import React, { useState, useMemo } from "react";
 import TextType from "./TextType";
+import { FaQuoteLeft } from "react-icons/fa";
 
-const Testimonials = () => {
+const testimonials = [
+  {
+    clientName: "Sarah Anderson",
+    clientPosition: "Chief Marketing Officer",
+    company: "TechVision Solutions",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    testimonialText:
+      "Working with this team has been an absolute game-changer for our business.",
+  },
+  {
+    clientName: "Rahul Verma",
+    clientPosition: "Product Manager",
+    company: "Innova Labs",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1595152772835-219674b2a8a6",
+    testimonialText:
+      "The way they understood our product vision was remarkable.",
+  },
+  {
+    clientName: "Emily Clark",
+    clientPosition: "Founder",
+    company: "CreativeHive",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
+    testimonialText:
+      "Amazing experience! They delivered beyond expectations.",
+  },
+  {
+    clientName: "Michael Rodriguez",
+    clientPosition: "CTO",
+    company: "BlueWave Systems",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde",
+    testimonialText:
+      "Their approach is modern, efficient, and incredibly reliable.",
+  },
+  {
+    clientName: "Aisha Khan",
+    clientPosition: "Marketing Head",
+    company: "BrandSpark",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7",
+    testimonialText:
+      "Great communication and fast delivery. The UI/UX results were exceptional!",
+  },
+  {
+    clientName: "Daniel Evans",
+    clientPosition: "CEO",
+    company: "NextGen Retail",
+    clientAvatar:
+      "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c",
+    testimonialText:
+      "Our e-commerce sales skyrocketed after their redesign. Brilliant team!",
+  },
+];// keep same
+
+const TestimonialItem = React.memo(
+  ({ data, isExpanded, onToggle }) => {
+    const truncated = useMemo(
+      () => data.testimonialText.slice(0, 150) + "...",
+      [data.testimonialText]
+    );
+
+    return (
+      <div className="bg-white/5 backdrop-blur-sm rounded-xl shadow-md p-6 md:p-7 transition-all duration-300 hover:shadow-xl hover:bg-white/10 border border-white/20">
+        <div className="relative">
+          <FaQuoteLeft className="text-4xl text-indigo-400/30 absolute -top-2 -left-2" />
+
+          <div className="flex flex-col md:flex-row gap-6 md:gap-5">
+            <div className="flex-shrink-0">
+              <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden ring-4 ring-white/10">
+                <img
+                  src={data.clientAvatar}
+                  alt={data.clientName}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://images.unsplash.com/photo-1633332755192-727a05c4013d";
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-white">{data.clientName}</h3>
+              <p className="text-sm text-gray-300">{data.clientPosition}</p>
+              <p className="text-sm text-indigo-300 font-medium">{data.company}</p>
+
+              <p className="mt-4 text-gray-200 leading-relaxed">
+                {isExpanded ? data.testimonialText : truncated}
+              </p>
+
+              <div className="mt-4 flex gap-4 items-center">
+                <button
+                  onClick={onToggle}
+                  className="text-indigo-300 hover:text-indigo-200 font-medium text-sm"
+                >
+                  {isExpanded ? "Read Less" : "Read More"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  },
+  (prev, next) =>
+    prev.isExpanded === next.isExpanded &&
+    prev.data.clientName === next.data.clientName
+);
+
+const TestimonialCard = () => {
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
   return (
-    <Container className="py-12">
-      {/* Heading Section */}
-      <div className="text-center mb-12 px-4">
+    <section className="max-w-7xl mx-auto px-4 md:px-10 lg:px-14 py-16 text-white">
+      <div className="text-center mb-16">
         <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
           Our Clients Love What We Do
         </h2>
 
-        <div className="text-lg md:text-xl text-gray-700 dark:text-gray-300">
-          <TextType
-            text={["Text typing effect", "for your websites", "Happy coding!"]}
-            typingSpeed={75}
-            pauseDuration={1500}
-            showCursor={true}
-            cursorCharacter="|"
-          />
+        <div className="text-lg md:text-xl text-gray-200">
+         
         </div>
       </div>
 
-      {/* Scrolling Testimonials */}
-      {/* <div className="relative z-30 overflow-hidden">
-        <div className="flex animate-scroll space-x-4 md:space-x-6 whitespace-nowrap will-change-transform">
-          {items.concat(items).map((item, index) => (
-            <div
-              key={index}
-              className="inline-block w-72 md:w-80 h-auto md:h-72 flex-shrink-0"
-            >
-              <div className="flex flex-col justify-between w-full h-full bg-white shadow-md px-5 py-6 rounded-2xl dark:bg-gray-800 dark:text-white hover:shadow-lg transition">
-                <p className="text-base leading-relaxed text-gray-700 dark:text-gray-300 mb-4">
-                  {item.text}
-                </p>
-
-                <Avatar img={item.img} name={item.name} title={item.title} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div> */}
-
-    </Container>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-10">
+        {testimonials.map((t, index) => (
+          <TestimonialItem
+            key={index}
+            data={t}
+            isExpanded={expandedIndex === index}
+            onToggle={() =>
+              setExpandedIndex(expandedIndex === index ? null : index)
+            }
+          />
+        ))}
+      </div>
+    </section>
   );
 };
 
-/* Avatar Component */
-function Avatar({ img, name, title }) {
-  return (
-    <div className="flex items-center space-x-4">
-      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden border border-gray-300 dark:border-gray-600">
-        <img
-          src={img}
-          alt="Avatar"
-          className="object-cover w-full h-full"
-        />
-      </div>
-      <div>
-        <h4 className="text-base md:text-lg font-semibold">{name}</h4>
-        <p className="text-gray-500 dark:text-gray-400 text-sm">{title}</p>
-      </div>
-    </div>
-  );
-}
-
-/* Container */
-function Container({ children, className }) {
-  return (
-    <div className={`container mx-auto px-4 md:px-6 ${className}`}>
-      {children}
-    </div>
-  );
-}
-
-export default Testimonials;
+export default TestimonialCard;
