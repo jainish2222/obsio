@@ -1,4 +1,14 @@
 import React from "react";
+import { animatedContent } from "../../data/servicesData";
+import { useParams } from "react-router-dom";
+
+const keyMap = {
+  "web-development": "Web Development",
+  "app-development": "App Development",
+  "ui-ux": "UI-UX",
+  devops: "DevOps",
+  "ai-solutions": "AI Solutions",
+};
 
 const CardInfo = ({
   cards = [],
@@ -7,11 +17,24 @@ const CardInfo = ({
   bgColor = "bg-gray-900/30",
   cardData,
 }) => {
-  const cardList = cardData.length ? cardData : [];
+   const cardList = cardData.length ? cardData : [];
 
+  const { tech } = useParams();
+  const mappedKey = keyMap[tech]; // convert route ID → animatedContent key
+  const data = animatedContent[mappedKey];
+  if (!data) return null;
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-20 font-jura text-center">
-     
+       <h1
+        className={`font-extrabold mb- my-7 tracking-tight 
+        text-2xl sm:text-3xl md:text-4xl lg:text-5xl ${data.highlightColor}`}
+        style={{ lineHeight: 1.2 }}
+      >
+        {data.title}
+      </h1>
+      <p className="my-7 mx-auto mb-16 max-w-xl text-sm sm:text-base text-white">
+        {data.description}
+      </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {cardList.map((card, index) => (
           <div

@@ -9,6 +9,7 @@ const AnimatedTitle = ({
   underlineColor = "fill-pink-400/70 dark:fill-pink-300/60",
   buttonBg = "bg-green-600 hover:bg-green-700",
 }) => {
+  
   return (
     <section className="relative flex items-center justify-center min-h-screen overflow-hidden w-[96%] md:w-[65%] lg:[75%] mx-auto font-space-grotesk">
       <div className="absolute inset-0"></div>

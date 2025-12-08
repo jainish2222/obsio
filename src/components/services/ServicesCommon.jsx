@@ -5,7 +5,9 @@ import { Stars } from "@react-three/drei";
 import ServiceCard from "./ServiceCard";
 import AnimatedTitle from "./AnimatedTitle";
 import CardInfo from "./CardInfo";
-import Footer from "../home/Footer"
+import Footer from "../home/Footer";
+import WhyChooseObsio from "./WhyChooseObsio"
+import ContactSection from "./ContactPage"
 import {
   servicesData,
   gradientMap,
@@ -19,27 +21,27 @@ const toKebabCase = (str) =>
   str?.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]+/g, "");
 
 const ServicesCommon = () => {
-  const { id } = useParams();
+  const { tech } = useParams();
 
   const fieldKey = useMemo(
-    () => Object.keys(servicesData).find((key) => toKebabCase(key) === id),
-    [id]
+    () => Object.keys(servicesData).find((key) => toKebabCase(key) === tech),
+    [tech]
   );
 
   const { fieldServices, backgroundGradient, cardData, colorSet, contentSet, buttonBg } =
     useMemo(() => {
       const fieldServices = fieldKey ? servicesData[fieldKey] : [];
       const backgroundGradient =
-        gradientMap[id] ||
+        gradientMap[tech] ||
         gradientMap.default ||
         "radial-gradient(125% 125% at 50% 100%, #000000 40%, #010133 100%)";
       const cardData = serviceCardData[fieldKey] || serviceCardData.default;
-      const colorSet = titleCardColorMap[id] || titleCardColorMap.default;
-      const contentSet = titleContentMap[id] || titleContentMap.default;
-      const buttonBg = buttonColorMap[id] || buttonColorMap.default;
+      const colorSet = titleCardColorMap[tech] || titleCardColorMap.default;
+      const contentSet = titleContentMap[tech] || titleContentMap.default;
+      const buttonBg = buttonColorMap[tech] || buttonColorMap.default;
 
       return { fieldServices, backgroundGradient, cardData, colorSet, contentSet, buttonBg };
-    }, [fieldKey, id]);
+    }, [fieldKey, tech]);
 
   return (
     <div className="min-h-screen relative overflow-hidden ">
@@ -74,7 +76,7 @@ const ServicesCommon = () => {
           fieldServices.map((service) => <ServiceCard key={service.id} service={service} highlightColor={colorSet.highlight}/>)
         ) : (
           <p className="text-white text-center text-xl mt-20">
-            No services found for "{id}"
+            No services found for "{tech}"
           </p>
         )}
       </div>
@@ -86,6 +88,8 @@ const ServicesCommon = () => {
         bgColor={`bg-${colorSet.highlight.split('-')[1]}-900/30`} // e.g., bg-green-900/30
         cardData={cardData}
       />
+      <WhyChooseObsio/>
+      <ContactSection/>
       <Footer/>
     </div>
   );

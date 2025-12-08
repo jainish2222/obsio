@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/home/Navbar";
 import Homepage from "./pages/Homepage";
 import Servicespage from "./pages/Servicespage"
+import WorkCommon from "./components/work/WorkCommon"
 
 function App() {
   return (
@@ -10,8 +11,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/services/:id" element={<Servicespage />} />
-
+        <Route path="/services/:tech" element={<Servicespage />} />
+        <Route path="/work/:id" element={<WorkCommon />} />
       </Routes>
     </Router>
   );

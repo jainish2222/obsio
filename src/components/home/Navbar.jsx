@@ -85,12 +85,12 @@ const Navbar = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-const bookCallHandler = () => {
-  window.open(
-    "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0nZXSwTUVw7CiYpB07_1FfNTDrFR8YOountFQNHRvRRYcs03ma7lOcDbI83Pm4ibmlP-HtjI_r?gv=true",
-    "_blank"
-  );
-};
+  const bookCallHandler = () => {
+    window.open(
+      "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0nZXSwTUVw7CiYpB07_1FfNTDrFR8YOountFQNHRvRRYcs03ma7lOcDbI83Pm4ibmlP-HtjI_r?gv=true",
+      "_blank"
+    );
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full text-white p-4 z-50 font-space-grotesk">
@@ -102,13 +102,13 @@ const bookCallHandler = () => {
             alt="Obsio logo"
             className="h-12 w-16 object-contain relative top-2"
           />
-          {/* <h1 className="text-md md:text-2xl font-jura font-extrabold">Obiso</h1> */}
         </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex gap-10 mr-3 items-center">
           {NAV_ITEMS.map((nav, idx) => (
             <FlyoutLink
+              key={idx}
               FlyoutContent={() => (
                 <DropdownContent content={nav.content} label={nav.label} />
               )}
@@ -118,20 +118,17 @@ const bookCallHandler = () => {
           ))}
 
           {/* Book Call */}
-          {/* <motion.div "bg-white text-gray-900 font-semibold px-3 py-2 border border-gray-300 rounded">
-            <Link
-              to="/book-call"
-              className="bg-white text-gray-900 font-semibold px-3 py-2 border border-gray-300 rounded"
-            >
-              Book a Call
-            </Link>
-          </motion.div> */}
-          <button className="bg-white text-gray-900 font-semibold px-3 py-2 border border-gray-300 rounded" onClick={bookCallHandler} >Book a call</button>
+          <button
+            className="bg-white text-gray-900 font-semibold px-3 py-2 border border-gray-300 rounded"
+            onClick={bookCallHandler}
+          >
+            Book a call
+          </button>
         </div>
 
         {/* Mobile Icon */}
         <button
-          className="md:hidden text-2xl"
+          className="md:hidden p-5 -m-7 text-2xl flex items-center justify-center"
           onClick={() => setMobileOpen((p) => !p)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
@@ -139,27 +136,46 @@ const bookCallHandler = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - NEW UI */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             ref={mobileRef}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-x-0 top-16 bottom-0 bg-neutral-900/90 backdrop-blur-md border-t border-neutral-700 p-4 md:hidden z-[60] overflow-y-auto"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 120, damping: 20 }}
+            className="fixed top-0 right-0 h-full w-[85%] bg-neutral-900/70 backdrop-blur-xl border-l border-white/10 shadow-xl z-[60] p-6 md:hidden flex flex-col justify-between"
           >
-            {NAV_ITEMS.map((nav, idx) => (
-              <MobileItem key={idx} title={nav.label} content={nav.content} />
-            ))}
-
-            {/* Book Call Mobile */}
-            <Link
-              to="/book-call"
-              className="block text-center w-full bg-white text-gray-900 font-semibold px-4 py-2 mt-4 border border-gray-300 rounded"
+            {/* Close button */}
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="text-3xl absolute top-5 right-5 text-white"
             >
-              Book a Call
-            </Link>
+              <FiX />
+            </button>
+
+            {/* NAV LIST */}
+            <div className="mt-12 flex flex-col gap-6">
+              {NAV_ITEMS.map((nav, idx) => (
+                <MobileItem
+                  key={idx}
+                  title={nav.label}
+                  content={nav.content}
+                  closeMenu={() => setMobileOpen(false)}
+                />
+              ))}
+            </div>
+
+            {/* BOTTOM CTA */}
+            <div className="mt-8">
+              <button
+                onClick={bookCallHandler}
+                className="w-full bg-white text-black font-semibold py-3 rounded-xl text-lg shadow-md"
+              >
+                Book a Call
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -168,9 +184,9 @@ const bookCallHandler = () => {
 };
 
 /* ---------------------------------------
-   MOBILE ITEM
+   MOBILE ITEM - NEW UI
 ---------------------------------------- */
-const MobileItem = ({ title, content }) => {
+const MobileItem = ({ title, content, closeMenu }) => {
   const [open, setOpen] = useState(false);
 
   const allLinks = useMemo(() => {
@@ -190,28 +206,38 @@ const MobileItem = ({ title, content }) => {
   }, [content, title]);
 
   return (
-    <div className="border-b border-neutral-800 py-3">
+    <div className="w-full">
+      {/* Title */}
       <button
         onClick={() => setOpen((p) => !p)}
-        className="w-full flex justify-between items-center"
+        className="w-full flex justify-between items-center py-3 text-left"
       >
-        <span className="text-lg">{title}</span>
-        <span className="text-xl">{open ? "−" : "+"}</span>
+        <span className="text-xl font-semibold">{title}</span>
+        <motion.span
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="text-2xl"
+        >
+          +
+        </motion.span>
       </button>
 
+      {/* Dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden pl-2 pt-2 flex flex-col gap-2"
+            transition={{ duration: 0.25 }}
+            className="pl-3 overflow-hidden flex flex-col gap-2"
           >
-            {allLinks.map((link, idx) => (
+            {allLinks.map((link, i) => (
               <Link
-                key={idx}
+                key={i}
                 to={link.url}
-                className="text-sm text-neutral-200 hover:text-blue-400 transition-colors"
+                onClick={closeMenu} // ✅ close menu on click
+                className="text-sm text-neutral-300 py-1 hover:text-white transition-all"
               >
                 {link.item}
               </Link>
@@ -219,6 +245,8 @@ const MobileItem = ({ title, content }) => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="h-[1px] bg-white/10 my-3" />
     </div>
   );
 };
@@ -293,7 +321,10 @@ const DropdownContent = ({ content, label }) => {
   return (
     <div className="w-full p-6 text-white flex gap-6">
       {chunks.map((column, idx) => (
-        <div key={idx} className="flex flex-col gap-4 min-w-[130px] text-center">
+        <div
+          key={idx}
+          className="flex flex-col gap-4 min-w-[130px] text-center"
+        >
           {column.map((link, i) => (
             <div key={i}>
               {link.section !== "_" && (

@@ -478,6 +478,42 @@ export const serviceCardData = {
     },
   ],
 };
+export const animatedContent = {
+  "Web Development": {
+    title: "We Build Modern Web Experiences",
+    description:
+      "High-performance websites using React, Next.js, and scalable backend technologies.",
+    highlightColor: "text-blue-300 dark:text-blue-400",
+  },
+
+  "App Development": {
+    title: "We Develop Powerful Mobile Apps",
+    description:
+      "iOS, Android & cross-platform apps built with Flutter, React Native, and modern APIs.",
+    highlightColor: "text-purple-300 dark:text-purple-400",
+  },
+
+  "UI-UX": {
+    title: "We Design Beautiful & Intuitive User Experiences",
+    description:
+      "From wireframes to prototypes, we craft UI/UX that improves user engagement and satisfaction.",
+    highlightColor: "text-pink-300 dark:text-pink-400",
+  },
+
+  "DevOps": {
+    title: "We Automate & Optimize Your Infrastructure",
+    description:
+      "CI/CD pipelines, cloud deployment, monitoring, and scalable infrastructure solutions.",
+    highlightColor: "text-cyan-300 dark:text-cyan-400",
+  },
+
+  "AI Solutions": {
+    title: "AI-Powered Solutions for Your Business",
+    description:
+      "We deliver automation, chatbots, recommendation engines, and intelligent data-driven insights.",
+    highlightColor: "text-green-300 dark:text-green-400",
+  },
+};
 // styling
 export const gradientMap = {
   "web-development":
@@ -604,5 +640,6 @@ export const buttonColorMap = {
 
   default: "bg-gray-600 hover:bg-gray-700",
 };
+
 
 
