@@ -11,14 +11,7 @@ const CardInfo = ({
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-20 font-jura text-center">
-      <h1
-        className={`font-extrabold mb-16 my-7 font-bold tracking-tight 
-  text-2xl sm:text-3xl md:text-4xl lg:text-5xl ${highlightColor}`}
-        style={{ lineHeight: 1.2 }}
-      >
-        Web Technologies
-      </h1>
-
+     
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {cardList.map((card, index) => (
           <div

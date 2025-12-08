@@ -65,16 +65,16 @@ const techItems = [
   { name: "AWS", category: "Deployment tools", icon: "/logos/aws.jpg" },
 ];
 
-const categoryColors = {
-  All: "bg-blue-600",
-  Frontend: "bg-pink-700",
-  Backend: "bg-green-700",
-  "UI/UX": "bg-purple-700",
-  App: "bg-yellow-400",
-  "AI Tools": "bg-indigo-700",
-  "E-Commerce": "bg-red-700",
-  "Deployment tools": "bg-teal-700",
-};
+// const categoryColors = {
+//   All: "bg-blue-600",
+//   Frontend: "bg-pink-700",
+//   Backend: "bg-green-700",
+//   "UI/UX": "bg-purple-700",
+//   App: "bg-yellow-400",
+//   "AI Tools": "bg-indigo-700",
+//   "E-Commerce": "bg-red-700",
+//   "Deployment tools": "bg-teal-700",
+// };
 
 const textColorMap = {
   App: "text-black",
@@ -120,7 +120,7 @@ export default function TechMenuGrid() {
               className={`px-4 sm:px-5 py-2 sm:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 border border-black dark:bg-gray-900 dark:text-gray-100 hover:shadow-md hover:-translate-y-1 active:translate-y-0 active:shadow-none
                 ${
                   isActive
-                    ? `${categoryColors[cat]} ${textColorMap[cat] ||
+                    ? ` ${textColorMap[cat] ||
                         textColorMap.default} shadow-lg scale-105 border-white`
                     : ""
                 }`}

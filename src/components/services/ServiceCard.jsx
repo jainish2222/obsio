@@ -35,19 +35,19 @@ const ServiceCard = ({ service, highlightColor }) => {
             {service.title}
           </h1>
 
-          <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed text-justify">
+          <p className="text-base md:text-lg text-white leading-relaxed text-justify">
             {service.description}
           </p>
 
           {/* BULLETS */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6 mt-6">
-            <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-base">
+            <ul className="space-y-1 text-white text-base">
               {service.bulletsLeft.map((bullet, i) => (
                 <li key={i}>• {bullet}</li>
               ))}
             </ul>
 
-            <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-base">
+            <ul className="space-y-1 text-white text-base">
               {service.bulletsRight.map((bullet, i) => (
                 <li key={i}>• {bullet}</li>
               ))}
