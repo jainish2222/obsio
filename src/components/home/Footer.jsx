@@ -6,78 +6,102 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-gray-700 pt-12 px-6 md:px-12 relative z-20 bg-transparent text-white">
+    <footer className="border-t border-gray-700 pt-12 px-3 md:px-12 relative z-20 bg-transparent text-white font-space-grotesk">
       <div className="max-w-7xl mx-auto">
         {/* TOP SECTION */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 md:gap-4 pb-12">
           {/* COMPANY + CONTACT */}
           <div className="col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <img src={logo} alt="Obsio Solutions Logo" className="h-12 w-12 object-contain" />
-              <span className="text-2xl font-bold uppercase text-white">Obsio Solutions</span>
+              <img
+                src={logo}
+                alt="Obsio Solutions Logo"
+                className="h-30 w-30 object-contain"
+              />
+              <span className="text-2xl font-bold uppercase text-white">
+                Obsio Solutions
+              </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
-              {/* Mobile */}
-              <div>
-                <p className="font-semibold flex items-center gap-2">
-                  <FiPhone /> Mobile
-                </p>
-                <a href="tel:+919876543210" className="hover:underline break-all">
-                  +91 98765 43210
-                </a>
+            <div className="flex justify-between gap-1">
+              {/* ---- GROUP 1 ---- */}
+              <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-y-5 text-sm">
+                {/* Mobile */}
+                <div>
+                  <p className="font-semibold flex items-center gap-2">
+                    <FiPhone /> Mobile
+                  </p>
+                  <a
+                    href="tel:+919876543210"
+                    className="hover:underline break-all"
+                  >
+                    +91 98765 43210
+                  </a>
+                </div>
+
+                {/* HR Email */}
+                <div>
+                  <p className="font-semibold flex items-center gap-2">
+                    <FiMail /> HR Email
+                  </p>
+                  <a
+                    href="mailto:hr@obsio.tech"
+                    className="hover:underline break-all"
+                  >
+                    hr@obsio.tech
+                  </a>
+                </div>
+
+                {/* India Office */}
+                <div className="sm:col-span-2">
+                  <p className="font-semibold flex items-center gap-2">
+                    <FaMapMarkerAlt /> India Office
+                  </p>
+                  <p className="break-words">Surat, Gujarat, India</p>
+                </div>
               </div>
 
-              {/* HR Email */}
-              <div>
-                <p className="font-semibold flex items-center gap-2">
-                  <FiMail /> HR Email
-                </p>
-                <a href="mailto:hr@obsio.tech" className="hover:underline break-all">
-                  hr@obsio.tech
-                </a>
-              </div>
+              {/* ---- GROUP 2 ---- */}
+              <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-y-5 text-sm">
+                {/* Phone */}
+                <div>
+                  <p className="font-semibold flex items-center gap-2">
+                    <FiPhone /> Phone
+                  </p>
+                  <a
+                    href="tel:+912612224455"
+                    className="hover:underline break-all"
+                  >
+                    +91 261 222 4455
+                  </a>
+                </div>
 
-              {/* Business Email */}
-              <div>
-                <p className="font-semibold flex items-center gap-2">
-                  <FiMail /> Business Email
-                </p>
-                <a href="mailto:business@obsio.tech" className="hover:underline break-all">
-                  business@obsio.tech
-                </a>
-              </div>
+                {/* Business Email */}
+                <div>
+                  <p className="font-semibold flex items-center gap-2">
+                    <FiMail /> Business Email
+                  </p>
+                  <a
+                    href="mailto:business@obsio.tech"
+                    className="hover:underline break-all"
+                  >
+                    business@obsio.tech
+                  </a>
+                </div>
 
-              {/* Phone */}
-              <div>
-                <p className="font-semibold flex items-center gap-2">
-                  <FiPhone /> Phone
-                </p>
-                <a href="tel:+912612224455" className="hover:underline break-all">
-                  +91 261 222 4455
-                </a>
-              </div>
-
-              {/* India Office */}
-              <div className="sm:col-span-2">
-                <p className="font-semibold flex items-center gap-2">
-                  <FaMapMarkerAlt /> India Office
-                </p>
-                <p className="break-words">Surat, Gujarat, India</p>
-              </div>
-
-              {/* Canada Office */}
-              <div className="sm:col-span-2">
-                <p className="font-semibold flex items-center gap-2">
-                  <FaMapMarkerAlt /> Canada Office
-                </p>
-                <p className="break-words">Toronto, Ontario, Canada</p>
+                {/* Canada Office */}
+                <div className="sm:col-span-2 ">
+                  <p className="font-semibold flex items-center gap-2">
+                    <FaMapMarkerAlt /> Canada Office
+                  </p>
+                  <p className="break-words">Toronto, Ontario, Canada</p>
+                </div>
               </div>
             </div>
           </div>
 
           {/* INDUSTRIES + COMPANY */}
-          <div>
+          <div className="md:pl-10">
             <h2 className="mb-6 text-sm font-semibold uppercase text-white">
               Industries
             </h2>
@@ -103,8 +127,16 @@ const Footer = () => {
               Company
             </h2>
             <ul className="space-y-3 text-white/80">
-              <li><a href="#" className="hover:underline">About Us</a></li>
-              <li><a href="#" className="hover:underline">Careers</a></li>
+              <li>
+                <a href="#" className="hover:underline">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:underline">
+                  Careers
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -114,9 +146,21 @@ const Footer = () => {
               Support
             </h2>
             <ul className="space-y-3 text-white/80">
-              <li><a href="/e1/privacy-policy" className="hover:underline">Privacy Policy</a></li>
-              <li><a href="/e1/refund-policy" className="hover:underline">Refund Policy</a></li>
-              <li><a href="/e1/terms-and-conditions" className="hover:underline">Terms & Conditions</a></li>
+              <li>
+                <a href="/e1/privacy-policy" className="hover:underline">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="/e1/refund-policy" className="hover:underline">
+                  Refund Policy
+                </a>
+              </li>
+              <li>
+                <a href="/e1/terms-and-conditions" className="hover:underline">
+                  Terms & Conditions
+                </a>
+              </li>
             </ul>
 
             <h2 className="mt-8 mb-4 text-sm font-semibold uppercase text-white">

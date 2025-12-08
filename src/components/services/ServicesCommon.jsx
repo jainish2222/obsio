@@ -1,70 +1,92 @@
-import React from "react";
-import ServiceCard from "./ServiceCard";
-import { servicesData, gradientMap } from "../../data/servicesData";
+import React, { Suspense, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { Stars } from "@react-three/drei";
+import ServiceCard from "./ServiceCard";
+import AnimatedTitle from "./AnimatedTitle";
+import CardInfo from "./CardInfo";
+import Footer from "../home/Footer"
+import {
+  servicesData,
+  gradientMap,
+  titleCardColorMap,
+  titleContentMap,
+  buttonColorMap,
+  serviceCardData,
+} from "../../data/servicesData";
 
-// Helper: convert string to kebab-case
 const toKebabCase = (str) =>
-  str
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]+/g, "");
+  str?.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]+/g, "");
 
 const ServicesCommon = () => {
-  const { id } = useParams(); // e.g., "web-development"
+  const { id } = useParams();
 
-  // Find matching key in servicesData
-  const fieldKey = Object.keys(servicesData).find(
-    (key) => toKebabCase(key) === id
+  const fieldKey = useMemo(
+    () => Object.keys(servicesData).find((key) => toKebabCase(key) === id),
+    [id]
   );
 
-  const fieldServices = fieldKey ? servicesData[fieldKey] : [];
+  const { fieldServices, backgroundGradient, cardData, colorSet, contentSet, buttonBg } =
+    useMemo(() => {
+      const fieldServices = fieldKey ? servicesData[fieldKey] : [];
+      const backgroundGradient =
+        gradientMap[id] ||
+        gradientMap.default ||
+        "radial-gradient(125% 125% at 50% 100%, #000000 40%, #010133 100%)";
+      const cardData = serviceCardData[fieldKey] || serviceCardData.default;
+      const colorSet = titleCardColorMap[id] || titleCardColorMap.default;
+      const contentSet = titleContentMap[id] || titleContentMap.default;
+      const buttonBg = buttonColorMap[id] || buttonColorMap.default;
 
-  // Dynamic gradient based on URL id
-  const backgroundGradient =
-    gradientMap[id] ||
-    gradientMap["default"] ||
-    "radial-gradient(125% 125% at 50% 100%, #000000 40%, #010133 100%)";
+      return { fieldServices, backgroundGradient, cardData, colorSet, contentSet, buttonBg };
+    }, [fieldKey, id]);
 
   return (
-    <div className="min-h-screen w-full relative py-40 overflow-hidden">
-
-      {/* BACKGROUND GRADIENT */}
-      <div
-        className="absolute inset-0 -z-20"
-        style={{ background: backgroundGradient }}
+    <div className="min-h-screen relative overflow-hidden ">
+      {/* HERO TITLE */}
+      <AnimatedTitle
+        titleBefore={contentSet.titleBefore}
+        highlight={contentSet.highlight}
+        titleAfter={contentSet.titleAfter}
+        description={contentSet.description}
+        buttonText={contentSet.buttonText}
+        buttonLink={contentSet.buttonLink}
+        highlightColor={colorSet.highlight}
+        underlineColor={colorSet.underline}
+        buttonBg={buttonBg}
       />
 
-      {/* STAR FIELD LAYER */}
-      <div className="absolute inset-0 -z-10 pointer-events-none opacity-60">
-        <Canvas
-          gl={{ antialias: true, powerPreference: "high-performance" }}
-          camera={{ position: [0, 0, 1], fov: 75 }}
-        >
-          <Stars
-            radius={80}
-            count={4000}
-            factor={4}
-            fade
-            speed={1.5}
-          />
+      {/* BACKGROUND */}
+      <div className="absolute inset-0 -z-20" style={{ background: backgroundGradient }} />
+
+      {/* STAR CANVAS */}
+      <div className="absolute inset-0 -z-10 opacity-50 pointer-events-none">
+        <Canvas camera={{ position: [0, 0, 1], fov: 75 }}>
+          <Suspense fallback={null}>
+            <Stars radius={50} count={20000} factor={5} fade speed={2} />
+          </Suspense>
         </Canvas>
       </div>
 
       {/* SERVICE CARDS */}
-      <div className="relative z-10">
-        {fieldServices.length > 0 ? (
-          fieldServices.map((service) => (
-            <ServiceCard key={service.id} service={service} />
-          ))
+      <div className="relative z-10 pb-20">
+        {fieldServices.length ? (
+          fieldServices.map((service) => <ServiceCard key={service.id} service={service} highlightColor={colorSet.highlight}/>)
         ) : (
-          <p className="text-white text-center mt-20 text-xl">
+          <p className="text-white text-center text-xl mt-20">
             No services found for "{id}"
           </p>
         )}
       </div>
+
+      {/* CARD INFO - SAME LOGIC */}
+      <CardInfo
+        highlightColor={colorSet.highlight} // text-green-300, text-blue-300 etc.
+        borderColor={`border-${colorSet.highlight.split('-')[3]}-700`} // e.g., border-green-700
+        bgColor={`bg-${colorSet.highlight.split('-')[1]}-900/30`} // e.g., bg-green-900/30
+        cardData={cardData}
+      />
+      <Footer/>
     </div>
   );
 };

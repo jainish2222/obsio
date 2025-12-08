@@ -1,4 +1,5 @@
 // data/servicesData.js
+//code
 export const servicesData = {
   "Web Development": [
     {
@@ -361,6 +362,123 @@ export const servicesData = {
     },
   ],
 };
+export const serviceCardData = {
+  "Web Development": [
+    {
+      title: "For Developers",
+      description: "Rapidly prototype and deploy web apps without local setup.",
+      iconColor: "text-blue-300",
+    },
+    {
+      title: "Content Creators",
+      description: "Deliver engaging content through scalable web platforms.",
+      iconColor: "text-blue-300",
+    },
+    {
+      title: "Educators & Trainers",
+      description: "Share coding assignments and projects seamlessly with students.",
+      iconColor: "text-blue-300",
+    },
+    {
+      title: "Open Source Maintainers",
+      description: "Showcase demos and let users try projects online easily.",
+      iconColor: "text-blue-300",
+    },
+  ],
+
+  "App Development": [
+    {
+      title: "Mobile Developers",
+      description: "Build robust iOS and Android apps with modern frameworks.",
+      iconColor: "text-purple-300",
+    },
+    {
+      title: "Cross-platform Experts",
+      description: "Deliver consistent experiences across devices efficiently.",
+      iconColor: "text-purple-300",
+    },
+    {
+      title: "UI/UX Focused",
+      description: "Create intuitive, smooth, and engaging app interfaces.",
+      iconColor: "text-purple-300",
+    },
+    {
+      title: "Enterprise Solutions",
+      description: "Develop scalable mobile solutions for businesses of all sizes.",
+      iconColor: "text-purple-300",
+    },
+  ],
+
+  "UI-UX": [
+    {
+      title: "User Experience Designers",
+      description: "Design seamless experiences that boost user retention.",
+      iconColor: "text-pink-300",
+    },
+    {
+      title: "Interface Designers",
+      description: "Craft pixel-perfect interfaces aligned with brand identity.",
+      iconColor: "text-pink-300",
+    },
+    {
+      title: "Design Strategists",
+      description: "Optimize workflows and engagement through smart design.",
+      iconColor: "text-pink-300",
+    },
+    {
+      title: "End-to-End Design",
+      description: "Deliver complete design solutions from research to prototype.",
+      iconColor: "text-pink-300",
+    },
+  ],
+
+  "DevOps": [
+    {
+      title: "Infrastructure Engineers",
+      description: "Automate and manage scalable, secure deployments.",
+      iconColor: "text-cyan-300",
+    },
+    {
+      title: "CI/CD Specialists",
+      description: "Implement fast, error-free CI/CD pipelines.",
+      iconColor: "text-cyan-300",
+    },
+    {
+      title: "Monitoring Experts",
+      description: "Ensure uptime with proactive monitoring and alerts.",
+      iconColor: "text-cyan-300",
+    },
+    {
+      title: "Automation Consultants",
+      description: "Streamline processes and reduce manual effort.",
+      iconColor: "text-cyan-300",
+    },
+  ],
+
+  "AI Solutions": [
+    {
+      title: "Recommendation Engine",
+      description: "Personalize content and products with AI suggestions.",
+      iconColor: "text-green-300",
+    },
+    {
+      title: "Predictive Health Monitoring",
+      description: "Enable early diagnosis and proactive care with ML.",
+      iconColor: "text-green-300",
+    },
+    {
+      title: "AI-Powered Chatbots",
+      description: "Automate support and provide instant user solutions.",
+      iconColor: "text-green-300",
+    },
+    {
+      title: "Gamified Learning & Education",
+      description: "Optimize learning with ML-driven performance tracking.",
+      iconColor: "text-green-300",
+    },
+  ],
+};
+// styling
 export const gradientMap = {
   "web-development":
     "radial-gradient(120% 120% at 50% 100%, #000000 40%, #0a1a3a 100%)", // dark navy blue
@@ -378,4 +496,113 @@ export const gradientMap = {
     "radial-gradient(120% 120% at 50% 100%, #000000 40%, #002b2b 100%)", // dark teal / cyan
 
 };
+export const titleCardColorMap = {
+  "web-development": {
+    highlight: "text-blue-300 dark:text-blue-400",
+    underline: "fill-blue-400/70 dark:fill-blue-300/60",
+    cardBorder: "border-blue-700",
+    cardBg: "bg-blue-900/30",
+  },
+  "app-development": {
+    highlight: "text-purple-300 dark:text-purple-400",
+    underline: "fill-purple-400/70 dark:fill-purple-300/60",
+    cardBorder: "border-purple-700",
+    cardBg: "bg-purple-900/30",
+  },
+  "ai-solutions": {
+    highlight: "text-green-300 dark:text-green-400",
+    underline: "fill-green-400/70 dark:fill-green-300/60",
+    cardBorder: "border-green-700",
+    cardBg: "bg-green-900/30",
+  },
+  "ui-ux": {
+    highlight: "text-pink-300 dark:text-pink-400",
+    underline: "fill-pink-400/70 dark:fill-pink-300/60",
+    cardBorder: "border-pink-700",
+    cardBg: "bg-pink-900/30",
+  },
+  "devops": {
+    highlight: "text-cyan-300 dark:text-cyan-400",
+    underline: "fill-cyan-400/70 dark:fill-cyan-300/60",
+    cardBorder: "border-cyan-700",
+    cardBg: "bg-cyan-900/30",
+  },
+  default: {
+    highlight: "text-white",
+    underline: "fill-white/40",
+    cardBorder: "border-gray-800",
+    cardBg: "bg-gray-900/30",
+  },
+};
+export const titleContentMap = {
+  "web-development": {
+    titleBefore: "We Build",
+    highlight: "High-Performance Websites",
+    titleAfter: "That Convert Visitors into Clients",
+    description:
+      "From modern landing pages to full-stack enterprise systems, we build websites that are fast, secure, SEO-optimized, and scalable.",
+    buttonText: "Start Your Project",
+    buttonLink: "#contact",
+  },
+
+  "app-development": {
+    titleBefore: "We Create",
+    highlight: "Smart Mobile Apps",
+    titleAfter: "That Scale with Your Business",
+    description:
+      "Native iOS, Android, and cross-platform apps built with pixel-perfect design and enterprise-level performance.",
+    buttonText: "Build My App",
+    buttonLink: "#contact",
+  },
+
+  "ai-solutions": {
+    titleBefore: "Supercharge Your Business with",
+    highlight: "AI-Powered Solutions",
+    titleAfter: "Built for Real-World Impact",
+    description:
+      "We integrate AI models that automate workflows, reduce manual work, and help your business make smarter decisions.",
+    buttonText: "Talk to AI Experts",
+    buttonLink: "#contact",
+  },
+
+  "ui-ux": {
+    titleBefore: "Experience the Power of",
+    highlight: "Stunning UI/UX Design",
+    titleAfter: "That Users Love",
+    description:
+      "Beautiful, intuitive, and conversion-optimized designs tailored for websites, mobile apps, and software dashboards.",
+    buttonText: "See Our Designs",
+    buttonLink: "#portfolio",
+  },
+
+  devops: {
+    titleBefore: "We Automate",
+    highlight: "Your Infrastructure",
+    titleAfter: "for Reliability & Speed",
+    description:
+      "CI/CD pipelines, scalable infrastructure, cloud deployment, monitoring, and DevOps automation for smooth operations.",
+    buttonText: "Optimize My System",
+    buttonLink: "#contact",
+  },
+
+  default: {
+    titleBefore: "We Deliver",
+    highlight: "High-Quality Digital Solutions",
+    titleAfter: "For Your Business Growth",
+    description:
+      "Web, mobile, AI, DevOps, and design — everything you need to scale your business digitally, all in one place.",
+    buttonText: "Get Started",
+    buttonLink: "#contact",
+  },
+};
+export const buttonColorMap = {
+  "web-development": "bg-blue-600 hover:bg-blue-700",
+  "app-development": "bg-purple-600 hover:bg-purple-700",
+  "ai-solutions": "bg-green-600 hover:bg-green-700",
+  "ui-ux": "bg-pink-600 hover:bg-pink-700",
+  "devops": "bg-cyan-600 hover:bg-cyan-700",
+
+  default: "bg-gray-600 hover:bg-gray-700",
+};
+
 

@@ -85,8 +85,15 @@ const Navbar = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+const bookCallHandler = () => {
+  window.open(
+    "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0nZXSwTUVw7CiYpB07_1FfNTDrFR8YOountFQNHRvRRYcs03ma7lOcDbI83Pm4ibmlP-HtjI_r?gv=true",
+    "_blank"
+  );
+};
+
   return (
-    <nav className="fixed top-0 left-0 w-full bg-transparent text-white p-4 z-50 font-space-grotesk">
+    <nav className="fixed top-0 left-0 w-full text-white p-4 z-50 font-space-grotesk">
       <div className="max-w-6xl mx-auto flex justify-between items-center py-2 px-4 md:px-0 relative z-20">
         {/* Logo */}
         <Link to="/" className="flex items-center select-none">
@@ -111,14 +118,15 @@ const Navbar = () => {
           ))}
 
           {/* Book Call */}
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          {/* <motion.div "bg-white text-gray-900 font-semibold px-3 py-2 border border-gray-300 rounded">
             <Link
               to="/book-call"
               className="bg-white text-gray-900 font-semibold px-3 py-2 border border-gray-300 rounded"
             >
               Book a Call
             </Link>
-          </motion.div>
+          </motion.div> */}
+          <button className="bg-white text-gray-900 font-semibold px-3 py-2 border border-gray-300 rounded" onClick={bookCallHandler} >Book a call</button>
         </div>
 
         {/* Mobile Icon */}
