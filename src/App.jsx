@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/home/Navbar";
 import Homepage from "./pages/Homepage";
 import Servicespage from "./pages/Servicespage"
-import WorkCommon from "./components/work/WorkCommon"
+import WorkCommon from "./components/work/portfolio/WorkCommon"
 
 function App() {
   return (
