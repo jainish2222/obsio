@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
-import TextType from "./TextType";
+import React, { useState, useMemo, useEffect } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
+import TextType from "./TextType";
 
 const testimonials = [
   {
@@ -57,8 +57,37 @@ const testimonials = [
     testimonialText:
       "Our e-commerce sales skyrocketed after their redesign. Brilliant team!",
   },
-];// keep same
+];
 
+
+// ------------------------------------------------------
+// ⭐ Skeleton Loader Component
+// ------------------------------------------------------
+const TestimonialSkeleton = () => (
+  <div className="bg-white/5 backdrop-blur-sm rounded-xl shadow-md p-6 md:p-7 border border-white/20 animate-pulse">
+    <div className="flex flex-col md:flex-row gap-6 md:gap-5">
+      <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20"></div>
+
+      <div className="flex-1 space-y-3">
+        <div className="h-4 w-40 bg-white/20 rounded"></div>
+        <div className="h-3 w-28 bg-white/20 rounded"></div>
+        <div className="h-3 w-32 bg-white/20 rounded"></div>
+
+        <div className="mt-4 space-y-2">
+          <div className="h-3 w-full bg-white/20 rounded"></div>
+          <div className="h-3 w-4/5 bg-white/20 rounded"></div>
+        </div>
+
+        <div className="mt-4 h-4 w-24 bg-white/20 rounded"></div>
+      </div>
+    </div>
+  </div>
+);
+
+
+// ------------------------------------------------------
+// Original Testimonial Item
+// ------------------------------------------------------
 const TestimonialItem = React.memo(
   ({ data, isExpanded, onToggle }) => {
     const truncated = useMemo(
@@ -96,14 +125,12 @@ const TestimonialItem = React.memo(
                 {isExpanded ? data.testimonialText : truncated}
               </p>
 
-              <div className="mt-4 flex gap-4 items-center">
-                <button
-                  onClick={onToggle}
-                  className="text-indigo-300 hover:text-indigo-200 font-medium text-sm"
-                >
-                  {isExpanded ? "Read Less" : "Read More"}
-                </button>
-              </div>
+              <button
+                onClick={onToggle}
+                className="mt-4 text-indigo-300 hover:text-indigo-200 font-medium text-sm"
+              >
+                {isExpanded ? "Read Less" : "Read More"}
+              </button>
             </div>
           </div>
         </div>
@@ -115,8 +142,19 @@ const TestimonialItem = React.memo(
     prev.data.clientName === next.data.clientName
 );
 
+
+// ------------------------------------------------------
+// ⭐ Main Component With Loader
+// ------------------------------------------------------
 const TestimonialCard = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // simulate loading
+    const timer = setTimeout(() => setLoading(false), 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className="max-w-7xl mx-auto px-4 md:px-10 lg:px-14 py-16 text-white">
@@ -124,24 +162,29 @@ const TestimonialCard = () => {
         <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
           Our Clients Love What We Do
         </h2>
+      </div>
 
-        <div className="text-lg md:text-xl text-gray-200">
-         
+      {/* ⭐ If Loading – Show Skeleton Grid */}
+      {loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-10">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <TestimonialSkeleton key={i} />
+          ))}
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-10">
-        {testimonials.map((t, index) => (
-          <TestimonialItem
-            key={index}
-            data={t}
-            isExpanded={expandedIndex === index}
-            onToggle={() =>
-              setExpandedIndex(expandedIndex === index ? null : index)
-            }
-          />
-        ))}
-      </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-10">
+          {testimonials.map((t, index) => (
+            <TestimonialItem
+              key={index}
+              data={t}
+              isExpanded={expandedIndex === index}
+              onToggle={() =>
+                setExpandedIndex(expandedIndex === index ? null : index)
+              }
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };

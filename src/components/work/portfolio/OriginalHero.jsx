@@ -5,7 +5,6 @@ const Orb = React.lazy(() => import("./Orb"));
 const OriginalHero = ({ currentTech, colors, techCategories }) => {
   return (
     <div className="relative z-10 flex flex-col md:flex-row items-center justify-center w-full max-w-6xl gap-4 mt-10 md:mt-0 px-6 mx-auto">
-      {/* Orb + Word Flip */}
       <div className="order-1 md:order-2 md:w-1/2 w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] relative flex items-center justify-center">
         <Suspense
           fallback={

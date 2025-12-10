@@ -167,8 +167,10 @@ export const projects = [
       "Frontend with React.js + GraphQL; Backend with Node.js + MongoDB.",
     ],
     techStack: ["React.js", "Redux", "GraphQL", "Node.js", "MongoDB"],
+     morePic: false,
   },{
     projectName: "Coupon App",
+     slug: "Coupon-app",
     image: "https://res.cloudinary.com/da0gxqsxh/image/upload/v1765292358/Coupon-app-p1_n64o6t.png",
     category: ["app"],
     projectBrief:
@@ -181,9 +183,11 @@ export const projects = [
       "Responsive UI for cross-device use.",
     ],
     techStack: ["React.js", "Redux", "Node.js", "Express", "MongoDB"],
+     morePic: true,
   },
   {
     projectName: "Delivery App",
+    slug: "Delivery-app",
     image: "https://res.cloudinary.com/da0gxqsxh/image/upload/v1765294788/Logistic-app-p4_zze8px.png",
     category: ["app"],
     projectBrief:
@@ -196,9 +200,11 @@ export const projects = [
       "Modern React UI optimized for speed.",
     ],
     techStack: ["React.js", "Redux", "Node.js", "Express", "MongoDB"],
+     morePic: true,
   },
   {
     projectName: "Logistic App",
+    slug: "Logistic-app",
     image: "https://res.cloudinary.com/da0gxqsxh/image/upload/v1765292517/Share-app-p1_jsvqi9.png",
     category: ["app"],
     projectBrief:
@@ -211,9 +217,11 @@ export const projects = [
       "Advanced filtering & reporting.",
     ],
     techStack: ["React.js", "Redux", "Node.js", "Express", "MongoDB"],
+     morePic: true,
   },
   {
     projectName: "Share App",
+     slug: "Share-app",
     image: "https://res.cloudinary.com/da0gxqsxh/image/upload/v1765292517/Share-app-p1_jsvqi9.png",
     category: ["app"],
     projectBrief:
@@ -226,9 +234,11 @@ export const projects = [
       "Clean and fast React interface.",
     ],
     techStack: ["React.js", "Redux", "Node.js", "Express", "MongoDB"],
+     morePic: true,
   },
   {
     projectName: "Coin App",
+    slug: "Coin-app",
     image: "https://res.cloudinary.com/da0gxqsxh/image/upload/v1765292312/Coin-app-p1_chccfx.png",
     category: ["app"],
     projectBrief:
@@ -241,5 +251,6 @@ export const projects = [
       "Smooth UI with charts & visuals.",
     ],
     techStack: ["React.js", "Redux", "Node.js", "Express", "MongoDB"],
+    morePic: true,
   },
 ];

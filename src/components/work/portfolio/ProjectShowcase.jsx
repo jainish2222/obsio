@@ -3,11 +3,14 @@ import React, { useRef, useEffect, useState } from "react";
 import { projects } from "../../../data/Portfolios";
 import defaultImage from "../../../assets/obsio_white_text.png";
 import { Globe } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+const slugify = (text) =>
+  text.toLowerCase().replace(/\s+/g, "-").replace(/[()]/g, "");
 
 const ProjectShowcase = () => {
   const projectCanvasRefs = useRef([]);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const navigate = useNavigate();
   // Stars for each project card
   useEffect(() => {
     projectCanvasRefs.current.forEach((canvas) => {
@@ -106,18 +109,35 @@ const ProjectShowcase = () => {
                   ))}
                 </ul>
               )}
-              <div className="flex flex-col items-center md:items-start mt-6 gap-3">
-                {/* Visit Button */}
-                <button
-                  onClick={() => window.open(project.liveLink || "#", "_blank")}
-                  className="flex items-center justify-center gap-2 bg-white text-black px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl shadow-lg shadow-gray-300/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                >
-                  <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
-                  Visit Web App
-                </button>
+              <div className="mt-6">
+                {/* Buttons Row */}
+                <div className="flex flex-wrap gap-3">
+                  {/* Visit Button */}
+                  <button
+                    onClick={() =>
+                      window.open(project.liveLink || "#", "_blank")
+                    }
+                    className="flex items-center justify-center gap-2 bg-white text-black px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl shadow-lg shadow-gray-300/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                  >
+                    <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
+                    Visit Web App
+                  </button>
 
-                {/* Category Tag */}
-                <div className="flex flex-wrap gap-2">
+                  {/* View Project Button */}
+                  {project.morePic && (
+                    <button
+                      onClick={() =>
+                        navigate(`/work/portfolio/${project.slug}`)
+                      }
+                      className="flex items-center justify-center px-5 py-2.5 sm:px-6 sm:py-3 bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-500/50 transition-all duration-300 hover:scale-105 hover:bg-blue-700 hover:shadow-2xl"
+                    >
+                      View Project
+                    </button>
+                  )}
+                </div>
+
+                {/* Category Tags Row */}
+                <div className="flex flex-wrap gap-2 mt-4">
                   {project.category?.map((cat, i) => (
                     <span
                       key={i}

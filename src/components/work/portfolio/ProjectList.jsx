@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import ProjectShowcase from "./ProjectShowcase";
-import PhotoGrid from "./PhotoGrid";
 
 const ProjectList = () => {
   return (
@@ -51,7 +50,7 @@ const SlideTabs = () => {
 
   {/* Projects */}
   <ProjectShowcase />
-  <PhotoGrid/>
+
 </>
 
   );
