@@ -2,11 +2,9 @@ import React, { useEffect, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Stars } from "@react-three/drei";
 import { motion, useMotionValue, useMotionTemplate, animate } from "framer-motion";
-
 import SmoothScrollHero  from "./DetailSection";
 import TechMenuGrid from "./TechstackSection";
 import Example from "./ContactSection";
-import Footer from "./Footer";
 import Testimonials from "./Testimonials";
 
 // ---------------------------------------------
@@ -117,7 +115,6 @@ const HeroSection = () => {
       <TechMenuGrid />
       <Testimonials />
       <Example />
-      <Footer />
     </motion.section>
   );
 };

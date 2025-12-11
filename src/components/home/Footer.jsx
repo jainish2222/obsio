@@ -6,7 +6,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-gray-700 pt-12 px-3 md:px-12 relative z-20 bg-transparent text-white font-space-grotesk">
+    <footer className="border-t border-gray-700 pt-12 px-3 md:px-12 relative z-20 bg-black text-white font-space-grotesk">
       <div className="max-w-7xl mx-auto">
         {/* TOP SECTION */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 md:gap-4 pb-12">

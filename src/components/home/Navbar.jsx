@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../assets/obsio_white_text.png";
-
 /* ---------------------------------------
    NAV ITEMS (STATIC)
 ---------------------------------------- */
@@ -28,26 +27,22 @@ const NAV_ITEMS = [
     label: "Industry",
     content: {
       _: [
-        "Food & Restaurant",
-        "Banking",
+        "Restaurant",
         "Real Estate",
         "Transport",
-        "Sports",
         "Ecommerce",
-        "Automotive",
-        "Education",
-        "Enterprise",
-        "Travel",
+        "Fintech",
+        "EdTech",
+        "Logistics",
+        "Retail",
         "Healthcare",
-        "Entertainment",
-        "On Demand App",
-        "Internet of Things",
+        "Manufacturing",
       ],
     },
   },
   {
     label: "Company",
-    content: { _: ["About Us", "Careers", "Teams"] },
+    content: { _: ["About Us", "Careers", "Teams", "Contact Us"] },
   },
 ];
 
@@ -93,7 +88,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full text-white p-4 z-50 font-space-grotesk">
+    <nav className="fixed top-0 left-0 w-full bg-black/2 text-white p-4 z-50 font-space-grotesk">
       <div className="max-w-6xl mx-auto flex justify-between items-center py-2 px-4 md:px-0 relative z-20">
         {/* Logo */}
         <Link to="/" className="flex items-center select-none">

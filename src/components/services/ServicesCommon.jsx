@@ -5,7 +5,7 @@ import { Stars } from "@react-three/drei";
 import ServiceCard from "./ServiceCard";
 import AnimatedTitle from "./AnimatedTitle";
 import CardInfo from "./CardInfo";
-import Footer from "../home/Footer";
+// import Footer from "../home/Footer";
 import WhyChooseObsio from "./WhyChooseObsio"
 import ContactSection from "./ContactPage"
 import {
@@ -90,7 +90,7 @@ const ServicesCommon = () => {
       />
       <WhyChooseObsio/>
       <ContactSection/>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 };

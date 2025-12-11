@@ -168,7 +168,93 @@ export const projects = [
     ],
     techStack: ["React.js", "Redux", "GraphQL", "Node.js", "MongoDB"],
      morePic: false,
-  },{
+  },
+   {
+  projectName: "Appliex UI Design",
+  slug: "Appliex-figma",
+  image: "https://obsio-project-images.s3.ap-south-1.amazonaws.com/ui-ux/Applex-figma/Applex-Figma-P4.png",
+  category: ["ui-ux"],
+  projectBrief:
+    "A modern landing page UI concept designed in Figma, focusing on clean layouts, smooth typography, and an engaging product-first visual approach.",
+  keyFeatures: [
+    "Modern hero section with bold typography.",
+    "Clean layout with proper spacing & hierarchy.",
+    "Reusable components with Auto Layout.",
+    "Responsive web design system.",
+    "Smooth prototype interactions for demo flow.",
+  ],
+  techStack: ["Figma", "Auto Layout", "Components", "Prototype"],
+  morePic: true,
+},
+{
+  projectName: "Brixly Web Redesign",
+  slug: "Brixly-figma",
+  image: "https://obsio-project-images.s3.ap-south-1.amazonaws.com/ui-ux/Brixly-figma/Brixly-Figma-P1.png",
+  category: ["ui-ux"],
+  projectBrief:
+    "A professional business website design created to improve brand identity, readability, and section-based content flow.",
+  keyFeatures: [
+    "Strong visual hierarchy and grid layout.",
+    "Brand-focused color palette.",
+    "Feature-focused section design.",
+    "Mobile-first frame variants.",
+    "Interactive prototype for presentation.",
+  ],
+  techStack: ["Figma", "Auto Layout", "Grid System", "Prototype"],
+  morePic: true,
+},
+{
+  projectName: "Dokterian Healthcare UI",
+  slug: "Dokterian-figma",
+  image: "https://obsio-project-images.s3.ap-south-1.amazonaws.com/ui-ux/Dokterian-figma/Dokterian-Figma-P1.png",
+  category: ["ui-ux"],
+  projectBrief:
+    "A healthcare and doctor appointment UI system focusing on trust, simplicity, and easy appointment booking flows.",
+  keyFeatures: [
+    "Doctor listing & booking screens.",
+    "Medical dashboard UI.",
+    "Clean white & blue healthcare theme.",
+    "Scalable design system.",
+    "Fully prototyped patient flow journey.",
+  ],
+  techStack: ["Figma", "Design System", "Variants", "Prototype"],
+  morePic: true,
+},
+{
+  projectName: "Floney Finance Dashboard",
+  slug: "Floney-figma",
+  image: "https://obsio-project-images.s3.ap-south-1.amazonaws.com/ui-ux/Floney-figma/Floney-Figma-P1.png",
+  category: ["ui-ux"],
+  projectBrief:
+    "A modern finance dashboard concept designed with a minimal and data-centric user interface for better insights.",
+  keyFeatures: [
+    "Analytics & charts screens.",
+    "Wallet and transaction UI.",
+    "Neumorphic card layouts.",
+    "Light & dark theme variants.",
+    "Interactive dashboard prototype.",
+  ],
+  techStack: ["Figma", "Components", "Auto Layout", "Prototype"],
+  morePic: true,
+},
+{
+  projectName: "Manatzy Landing Page UI",
+  slug: "Manatzy-figma",
+  image: "https://obsio-project-images.s3.ap-south-1.amazonaws.com/ui-ux/Manatzy-figma/Manatzy-figma-p1.png",
+  category: ["ui-ux"],
+  projectBrief:
+    "It is a premium landing page UI concept designed for a modern startup brand, emphasizing visual storytelling and product identity.",
+  keyFeatures: [
+    "Unique hero banner layout.",
+    "Brand-driven color styling.",
+    "Smoothly structured sections.",
+    "Reusable design components.",
+    "Fully responsive web mockups.",
+  ],
+  techStack: ["Figma", "Design System", "Auto Layout", "Prototype"],
+  morePic: true,
+},
+  {
     projectName: "Coupon App",
      slug: "Coupon-app",
     image: "https://res.cloudinary.com/da0gxqsxh/image/upload/v1765292358/Coupon-app-p1_n64o6t.png",
@@ -253,4 +339,5 @@ export const projects = [
     techStack: ["React.js", "Redux", "Node.js", "Express", "MongoDB"],
     morePic: true,
   },
+ 
 ];

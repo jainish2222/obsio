@@ -1,9 +1,13 @@
 import React from "react";
 import Lottie from "lottie-react";
 import AstroFloating from "../../data/Astro_Floating.json";
+import Meta_Universe from "../../data/Meta_Universe.json";
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 const ContactPage = () => {
+  const location = useLocation();
+  const showSpaceAnimation = location.pathname.includes("/company/");
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-start px-5 py-14 font-jura">
       {/* Title */}
@@ -26,7 +30,7 @@ const ContactPage = () => {
           className="w-[430px] h-[430px] lg:w-[520px] lg:h-[520px] flex items-center justify-center"
         >
           <Lottie
-            animationData={AstroFloating}
+            animationData={showSpaceAnimation ? Meta_Universe : AstroFloating }
             loop
             autoplay
             className="w-full h-full"

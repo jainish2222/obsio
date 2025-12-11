@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Portfolio = () => {
-  const { project } = useParams();
+ const { category, project } = useParams();
+  const {application} = useParams();
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-
+ 
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const res = await fetch(
-          `https://obsio-project-detail-backend-1.onrender.com/api/images/app/${project}`
+          `https://obsio-project-detail-backend-2.onrender.com/api/images/${category}/${project}`
         );
         if (!res.ok) throw new Error("Failed to fetch images");
         const data = await res.json();
