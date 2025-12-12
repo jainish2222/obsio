@@ -1,6 +1,5 @@
-// Production-Ready TechMenuGrid Component
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import styles from "./text.module.css";
 
 const techCategories = [
@@ -23,8 +22,6 @@ const techItems = [
   { name: "Tailwind CSS", category: "Frontend", icon: "/logos/tailwindcss.svg" },
   { name: "React.js", category: "Frontend", icon: "/logos/react.svg" },
   { name: "Next.js", category: "Frontend", icon: "/logos/nextdotjs.svg" },
-
-  // Backend
   { name: "Node.js", category: "Backend", icon: "/logos/nodedotjs.svg" },
   { name: "Express.js", category: "Backend", icon: "/logos/express.svg" },
   { name: "Nest.js", category: "Backend", icon: "/logos/nestjs.svg" },
@@ -35,46 +32,25 @@ const techItems = [
   { name: "Firebase", category: "Backend", icon: "/logos/firebase.svg" },
   { name: "Supabase", category: "Backend", icon: "/logos/supabase.svg" },
   { name: "Cloudflare Workers", category: "Backend", icon: "/logos/cloudflareworkers.svg" },
-
-  // UI/UX
   { name: "Figma", category: "UI/UX", icon: "/logos/figma.svg" },
   { name: "Canva", category: "UI/UX", icon: "/logos/canva.svg" },
   { name: "Adobe XD", category: "UI/UX", icon: "/logos/adobe.svg" },
-
-  // App
   { name: "iOS (native)", category: "App", icon: "/logos/ios.svg" },
   { name: "Flutter", category: "App", icon: "/logos/flutter.svg" },
   { name: "Swift", category: "App", icon: "/logos/swift.svg" },
   { name: "Dart", category: "App", icon: "/logos/dart.svg" },
   { name: "React Native", category: "App", icon: "/logos/react.svg" },
-
-  // AI Tools
   { name: "Claude", category: "AI Tools", icon: "/logos/claude.svg" },
   { name: "Gemini", category: "AI Tools", icon: "/logos/googlegemini.svg" },
   { name: "OpenAI", category: "AI Tools", icon: "/logos/openai.svg" },
   { name: "Replit AI", category: "AI Tools", icon: "/logos/replit.svg" },
   { name: "V0", category: "AI Tools", icon: "/logos/v0.svg" },
-
-  // E-Commerce
   { name: "Shopify", category: "E-Commerce", icon: "/logos/shopify.svg" },
-
-  // Deployment tools
   { name: "Vercel", category: "Deployment tools", icon: "/logos/vercel.svg" },
   { name: "Render", category: "Deployment tools", icon: "/logos/render.svg" },
   { name: "Netlify", category: "Deployment tools", icon: "/logos/netlify.svg" },
   { name: "AWS", category: "Deployment tools", icon: "/logos/aws.jpg" },
 ];
-
-// const categoryColors = {
-//   All: "bg-blue-600",
-//   Frontend: "bg-pink-700",
-//   Backend: "bg-green-700",
-//   "UI/UX": "bg-purple-700",
-//   App: "bg-yellow-400",
-//   "AI Tools": "bg-indigo-700",
-//   "E-Commerce": "bg-red-700",
-//   "Deployment tools": "bg-teal-700",
-// };
 
 const textColorMap = {
   App: "text-black",
@@ -84,21 +60,30 @@ const textColorMap = {
 export default function TechMenuGrid() {
   const [selected, setSelected] = useState("Frontend");
 
-  const filteredItems =
-    selected === "All"
+  // Memoize filtered items
+  const filteredItems = useMemo(() => {
+    return selected === "All"
       ? techItems
       : techItems.filter((item) => item.category === selected);
+  }, [selected]);
+
+  // Memoize animated title spans
+  const titleSpans = useMemo(
+    () =>
+      "Technologies We Work With".split("").map((char, idx) => (
+        <span key={idx} className={styles.hoverText}>
+          {char}
+        </span>
+      )),
+    []
+  );
 
   return (
     <div className="relative z-20 px-4 md:px-10 lg:px-20 py-12 w-full max-w-[95%] mx-auto text-center m-20">
       {/* Title */}
       <div className="grid place-content-center mb-6">
         <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
-          {"Technologies We Work With".split("").map((char, idx) => (
-            <span key={idx} className={styles.hoverText}>
-              {char}
-            </span>
-          ))}
+          {titleSpans}
         </h2>
       </div>
 
@@ -112,18 +97,12 @@ export default function TechMenuGrid() {
       <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-16">
         {techCategories.map((cat) => {
           const isActive = selected === cat;
-
           return (
             <button
               key={cat}
               onClick={() => setSelected(cat)}
               className={`px-4 sm:px-5 py-2 sm:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 border border-black dark:bg-gray-900 dark:text-gray-100 hover:shadow-md hover:-translate-y-1 active:translate-y-0 active:shadow-none
-                ${
-                  isActive
-                    ? ` ${textColorMap[cat] ||
-                        textColorMap.default} shadow-lg scale-105 border-white`
-                    : ""
-                }`}
+                ${isActive ? `${textColorMap[cat] || textColorMap.default} shadow-lg scale-105 border-white` : ""}`}
             >
               {cat}
             </button>
@@ -143,6 +122,7 @@ export default function TechMenuGrid() {
               alt={tech.name}
               width={36}
               height={36}
+              loading="lazy"
               className="object-contain sm:w-[40px] sm:h-[40px]"
             />
           </div>

@@ -6,6 +6,11 @@ import {
   useTransform,
 } from "framer-motion";
 import { useRef } from "react";
+import bgImage from "../../assets/image.png";
+import Image1 from "../../assets/picture1.avif";
+import Image2 from "../../assets/picture2.avif";
+import Image3 from "../../assets/picture3.avif";
+import Image4 from "../../assets/picture4.avif";
 
 const SECTION_HEIGHT = 1500;
 
@@ -42,7 +47,7 @@ const HERO_HEIGHT = isMobile ? 800 : SECTION_HEIGHT;
 
 const CenterImage = () => {
   const { scrollY } = useScroll();
-
+  
   const clip1 = useTransform(scrollY, [0, 1500], [25, 0]);
   const clip2 = useTransform(scrollY, [0, 1500], [75, 100]);
 
@@ -68,7 +73,7 @@ const CenterImage = () => {
         backgroundSize,
         opacity,
         backgroundImage:
-          "url(https://images.unsplash.com/photo-1460186136353-977e9d6085a1?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+          `url(${bgImage})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
@@ -80,7 +85,7 @@ const ParallaxImages = () => {
   return (
     <div className="mx-auto max-w-5xl px-4 pt-[200px]">
       <ParallaxImg
-        src="https://images.unsplash.com/photo-1725455816285-4961b98be1f9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cml2ZXIlMjBwdXJwbGV8ZW58MHx8MHx8fDA%3D"
+        src={Image1}
         alt="And example of a space launch"
         start={-200}
         end={200}
@@ -88,7 +93,7 @@ const ParallaxImages = () => {
       />
 
       <ParallaxImg
-        src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1vdW50YWlufGVufDB8fDB8fHww"
+        src={Image2}
         alt="An example of a space launch"
         start={200}
         end={-250}
@@ -96,7 +101,7 @@ const ParallaxImages = () => {
       />
 
       <ParallaxImg
-        src="https://images.unsplash.com/photo-1645186296371-0b4efad96bdd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBpcmFtaWQlMjBwdXJwbGV8ZW58MHx8MHx8fDA%3D"
+        src={Image3}
         alt="Orbiting satellite"
         start={-200}
         end={200}
@@ -104,7 +109,7 @@ const ParallaxImages = () => {
       />
 
       <ParallaxImg
-        src="https://images.unsplash.com/photo-1543847036-8e67e0c526f4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YXJjaGl0ZWN0dXJlJTIwYnVpbGRpbmd8ZW58MHx8MHx8fDA%3D"
+        src={Image4}
         alt="Orbiting satellite"
         start={0}
         end={-500}

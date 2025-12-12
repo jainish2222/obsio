@@ -15,6 +15,9 @@ import Contact from "./components/company/contact/Contact";
 import IndustryPage from "./components/industries/IndustryPage";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import Privacy from "./components/support/privacy";
+import Terms from "./components/support/Terms";
+import Refund from "./components/support/Refund";
 
 function App() {
   return (
@@ -32,7 +35,11 @@ function App() {
         <Route path="/company/about-us" element={<About />} />
         <Route path="/company/contact-us" element={<Contact />} />
         <Route path="/company/teams" element={<Team />} />
+        <Route path="/support/privacy-policy" element={<Privacy />} />
         <Route path="/industry/:field" element={<IndustryPage />} />
+        <Route path="/support/privacy-policy" element={<Privacy />} />
+        <Route path="/support/terms-and-conditions" element={<Terms />} />
+        <Route path="/support/refund-policy" element={<Refund />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

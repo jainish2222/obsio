@@ -1,184 +1,225 @@
-// Production-ready, white-text Footer Component
+// Ultra-Optimized Footer Component
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/obsio_white_t.png";
 import { FiPhone, FiMail } from "react-icons/fi";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { Linkedin, Twitter } from "lucide-react";
+
+const contactInfo = [
+  {
+    title: "Mobile",
+    icon: <FiPhone />,
+    value: "+91 87992 10169",
+    link: "tel:+918799210169",
+  },
+  {
+    title: "HR Email",
+    icon: <FiMail />,
+    value: "hr@obsio.tech",
+    link: "mailto:hr@obsio.tech",
+  },
+  {
+    title: "India Office",
+    icon: <FaMapMarkerAlt />,
+    value: " 310-311, Raj Imperia, Sarthana Jakatnaka, Surat, Gujarat 395013",
+  },
+];
+
+const contactInfo2 = [
+  {
+    title: "Phone",
+    icon: <FiPhone />,
+    value: "+91 261 222 4455",
+    link: "tel:+912612224455",
+  },
+  {
+    title: "Business Email",
+    icon: <FiMail />,
+    value: "business@obsio.tech",
+    link: "mailto:business@obsio.tech",
+  },
+  {
+    title: "Canada Office",
+    icon: <FaMapMarkerAlt />,
+    value: "Toronto, Ontario, Canada",
+  },
+];
+
+const industries = [
+  { name: "Food & Restaurant", link: "/industry/restaurant" },
+  { name: "Healthcare", link: "/industry/healthcare" },
+  { name: "Real Estate", link: "/industry/real-estate" },
+  { name: "Transport", link: "/industry/transport" },
+  { name: "Fintech", link: "/industry/fintech" },
+  { name: "E-Commerce", link: "/industry/ecommerce" },
+  { name: "Retail", link: "/industry/retail" },
+];
+
+const services = [
+  { name: "Web Development", link: "/services/web-development" },
+  { name: "App Development", link: "/services/app-development" },
+  { name: "UI/UX Design", link: "/services/ui-ux" },
+  { name: "AI Agents & Automation", link: "/services/ai-solutions" },
+  { name: "DevOps", link: "/services/devops" },
+];
+
+const socialIcons = [
+  {
+    icon: <Linkedin size={20} />,
+    link: "https://www.linkedin.com/company/obsio-solutions",
+  },
+  { icon: <Twitter size={20} />, link: "https://x.com" },
+];
 
 const Footer = () => {
   return (
-    <footer className="border-t border-gray-700 pt-12 px-3 md:px-12 relative z-20 bg-black text-white font-space-grotesk">
+    <footer className="bg-black text-white border-t border-gray-700 pt-12 px-4 md:px-12 relative z-20 font-space-grotesk">
       <div className="max-w-7xl mx-auto">
-        {/* TOP SECTION */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 md:gap-4 pb-12">
-          {/* COMPANY + CONTACT */}
+        {/* TOP GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 pb-12">
+          {/* COMPANY INFO */}
           <div className="col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <img
                 src={logo}
                 alt="Obsio Solutions Logo"
-                className="h-30 w-30 object-contain"
+                className="h-20 w-20"
               />
-              <span className="text-2xl font-bold uppercase text-white">
+              <span className="text-2xl font-bold uppercase">
                 Obsio Solutions
               </span>
             </div>
 
-            <div className="flex justify-between gap-1">
-              {/* ---- GROUP 1 ---- */}
-              <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-y-5 text-sm">
-                {/* Mobile */}
-                <div>
-                  <p className="font-semibold flex items-center gap-2">
-                    <FiPhone /> Mobile
-                  </p>
-                  <a
-                    href="tel:+919876543210"
-                    className="hover:underline break-all"
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* LEFT GROUP */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 text-sm w-full">
+                {contactInfo.map((item) => (
+                  <div
+                    key={item.title}
+                    className={
+                      item.title.includes("Office") ? "sm:col-span-2" : ""
+                    }
                   >
-                    +91 98765 43210
-                  </a>
-                </div>
-
-                {/* HR Email */}
-                <div>
-                  <p className="font-semibold flex items-center gap-2">
-                    <FiMail /> HR Email
-                  </p>
-                  <a
-                    href="mailto:hr@obsio.tech"
-                    className="hover:underline break-all"
-                  >
-                    hr@obsio.tech
-                  </a>
-                </div>
-
-                {/* India Office */}
-                <div className="sm:col-span-2">
-                  <p className="font-semibold flex items-center gap-2">
-                    <FaMapMarkerAlt /> India Office
-                  </p>
-                  <p className="break-words">Surat, Gujarat, India</p>
-                </div>
+                    <p className="font-semibold flex items-center gap-2">
+                      {item.icon} {item.title}
+                    </p>
+                    {item.link ? (
+                      <Link
+                        href={item.link}
+                        className="hover:underline break-all"
+                      >
+                        {item.value}
+                      </Link>
+                    ) : (
+                      <p className="break-words">{item.value}</p>
+                    )}
+                  </div>
+                ))}
               </div>
 
-              {/* ---- GROUP 2 ---- */}
-              <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-y-5 text-sm">
-                {/* Phone */}
-                <div>
-                  <p className="font-semibold flex items-center gap-2">
-                    <FiPhone /> Phone
-                  </p>
-                  <a
-                    href="tel:+912612224455"
-                    className="hover:underline break-all"
+              {/* RIGHT GROUP */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 text-sm w-full">
+                {contactInfo2.map((item) => (
+                  <div
+                    key={item.title}
+                    className={
+                      item.title.includes("Office") ? "sm:col-span-2 -mt-5" : ""
+                    }
                   >
-                    +91 261 222 4455
-                  </a>
-                </div>
-
-                {/* Business Email */}
-                <div>
-                  <p className="font-semibold flex items-center gap-2">
-                    <FiMail /> Business Email
-                  </p>
-                  <a
-                    href="mailto:business@obsio.tech"
-                    className="hover:underline break-all"
-                  >
-                    business@obsio.tech
-                  </a>
-                </div>
-
-                {/* Canada Office */}
-                <div className="sm:col-span-2 ">
-                  <p className="font-semibold flex items-center gap-2">
-                    <FaMapMarkerAlt /> Canada Office
-                  </p>
-                  <p className="break-words">Toronto, Ontario, Canada</p>
-                </div>
+                    <p className="font-semibold flex items-center gap-2">
+                      {item.icon} {item.title}
+                    </p>
+                    {item.link ? (
+                      <Link
+                        href={item.link}
+                        className="hover:underline break-all"
+                      >
+                        {item.value}
+                      </Link>
+                    ) : (
+                      <p className="break-words">{item.value}</p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
           {/* INDUSTRIES + COMPANY */}
-          <div className="md:pl-10">
-            <h2 className="mb-6 text-sm font-semibold uppercase text-white">
-              Industries
-            </h2>
+          <div>
+            <h2 className="mb-6 text-sm font-semibold uppercase">Industries</h2>
             <ul className="space-y-3 mb-8 text-white/80">
-              {[
-                "Food & Restaurant",
-                "Banking",
-                "Real Estate",
-                "Transport",
-                "Sports",
-                "E-Commerce",
-                "Automotive",
-              ].map((item) => (
-                <li key={item} className="overflow-x-auto scrollbar-none">
-                  <a href="#" className="hover:underline whitespace-nowrap">
-                    {item}
-                  </a>
+              {industries.map((item, link) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.link}
+                    className="hover:underline whitespace-nowrap"
+                  >
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
 
-            <h2 className="mb-6 text-sm font-semibold uppercase text-white">
-              Company
-            </h2>
+            <h2 className="mb-6 text-sm font-semibold uppercase">Company</h2>
             <ul className="space-y-3 text-white/80">
               <li>
-                <a href="#" className="hover:underline">
+                <Link to="/company/about-us" className="hover:underline">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <Link to="/company/careers" className="hover:underline">
                   Careers
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link to="/company/teams" className="hover:underline">
+                  Team
+                </Link>
+              </li>
+              <li>
+                <Link to="/company/contact-us" className="hover:underline">
+                  Contact Us
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* SUPPORT + SERVICES */}
           <div>
-            <h2 className="mb-6 text-sm font-semibold uppercase text-white">
-              Support
-            </h2>
+            <h2 className="mb-6 text-sm font-semibold uppercase">Support</h2>
             <ul className="space-y-3 text-white/80">
               <li>
-                <a href="/e1/privacy-policy" className="hover:underline">
+                <Link to="/support/privacy-policy" className="hover:underline">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/e1/refund-policy" className="hover:underline">
+                <Link to="/support/refund-policy" className="hover:underline">
                   Refund Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/e1/terms-and-conditions" className="hover:underline">
+                <Link
+                  to="/support/terms-and-conditions"
+                  className="hover:underline"
+                >
                   Terms & Conditions
-                </a>
+                </Link>
               </li>
             </ul>
 
-            <h2 className="mt-8 mb-4 text-sm font-semibold uppercase text-white">
+            <h2 className="mt-8 mb-4 text-sm font-semibold uppercase">
               Services
             </h2>
             <ul className="space-y-3 text-white/80">
-              {[
-                "Web Development",
-                "App Development",
-                "Shopify Store Development",
-                "UI/UX Design",
-                "SEO Optimization",
-                "AI Agents & Automation",
-              ].map((srv) => (
-                <li key={srv}>
-                  <a href="#" className="hover:underline">
-                    {srv}
-                  </a>
+              {services.map((srv) => (
+                <li key={srv.name}>
+                  <Link to={srv.link} className="hover:underline">
+                    {srv.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -187,29 +228,25 @@ const Footer = () => {
 
         <hr className="border-gray-700" />
 
-        {/* BOTTOM COPYRIGHT */}
+        {/* FOOTER BOTTOM */}
         <div className="flex flex-col sm:flex-row items-center justify-between py-6 text-white/60">
-          <span className="text-sm text-center sm:text-left">
-            © 2025{" "}
-            <a className="hover:underline text-white" href="#">
-              Obsio Solutions™
-            </a>{" "}
+          <p className="text-sm text-center sm:text-left">
+            © 2018{" "}
+            <span className="text-white hover:underline">Obsio Solutions™</span>{" "}
             — All rights reserved.
-          </span>
+          </p>
 
           <div className="flex space-x-5 mt-4 sm:mt-0">
-            {[
-              { icon: "ri-facebook-fill" },
-              { icon: "ri-instagram-line" },
-              { icon: "ri-linkedin-fill" },
-            ].map((s, i) => (
-              <a
+            {socialIcons.map((s, i) => (
+              <Link
                 key={i}
-                href="#"
-                className="text-white/60 hover:text-white text-xl"
+                to={s.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition"
               >
-                <i className={s.icon}></i>
-              </a>
+                {s.icon}
+              </Link>
             ))}
           </div>
         </div>
@@ -218,4 +255,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

@@ -577,8 +577,8 @@ export const titleContentMap = {
     titleAfter: "That Convert Visitors into Clients",
     description:
       "From modern landing pages to full-stack enterprise systems, we build websites that are fast, secure, SEO-optimized, and scalable.",
-    buttonText: "Start Your Project",
-    buttonLink: "#contact",
+    buttonText: "See Our Work",
+    buttonLink: "/work/portfolio",
   },
 
   "app-development": {
@@ -587,8 +587,8 @@ export const titleContentMap = {
     titleAfter: "That Scale with Your Business",
     description:
       "Native iOS, Android, and cross-platform apps built with pixel-perfect design and enterprise-level performance.",
-    buttonText: "Build My App",
-    buttonLink: "#contact",
+    buttonText: "See Our Portfolio",
+    buttonLink: "/work/portfolio",
   },
 
   "ai-solutions": {
@@ -597,8 +597,8 @@ export const titleContentMap = {
     titleAfter: "Built for Real-World Impact",
     description:
       "We integrate AI models that automate workflows, reduce manual work, and help your business make smarter decisions.",
-    buttonText: "Talk to AI Experts",
-    buttonLink: "#contact",
+    buttonText: "See Our Portfolio",
+    buttonLink: "/work/portfolio",
   },
 
   "ui-ux": {
@@ -608,7 +608,7 @@ export const titleContentMap = {
     description:
       "Beautiful, intuitive, and conversion-optimized designs tailored for websites, mobile apps, and software dashboards.",
     buttonText: "See Our Designs",
-    buttonLink: "#portfolio",
+    buttonLink: "/work/portfolio",
   },
 
   devops: {
@@ -617,8 +617,8 @@ export const titleContentMap = {
     titleAfter: "for Reliability & Speed",
     description:
       "CI/CD pipelines, scalable infrastructure, cloud deployment, monitoring, and DevOps automation for smooth operations.",
-    buttonText: "Optimize My System",
-    buttonLink: "#contact",
+    buttonText: "See Our Work",
+    buttonLink: "/work/portfolio",
   },
 
   default: {
@@ -628,7 +628,7 @@ export const titleContentMap = {
     description:
       "Web, mobile, AI, DevOps, and design — everything you need to scale your business digitally, all in one place.",
     buttonText: "Get Started",
-    buttonLink: "#contact",
+    buttonLink: "/work/portfolio",
   },
 };
 export const buttonColorMap = {

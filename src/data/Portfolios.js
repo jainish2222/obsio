@@ -339,5 +339,40 @@ export const projects = [
     techStack: ["React.js", "Redux", "Node.js", "Express", "MongoDB"],
     morePic: true,
   },
- 
+  {
+  projectName: "Companion Sathi - AI Tutor",
+  slug: "companion-sathi",
+  image:
+    "https://res.cloudinary.com/dqfkbkx7k/image/upload/v1765539439/Gemini_Generated_Image_n2ocbmn2ocbmn2oc_nw6ulx.png",
+  category: ["ai"],
+  projectBrief:
+    "An AI-powered personal assistant and learning tutor that helps users with tasks, reminders, chat support, and personalized learning assistance.",
+  keyFeatures: [
+    "Smart AI chat assistant.",
+    "Daily productivity planner.",
+    "Task and reminder automation.",
+    "Voice command support.",
+    "Secure authentication & data privacy.",
+  ],
+  techStack: ["React Native", "Node.js", "Express", "MongoDB", "OpenAI API"],
+  morePic: false,
+},
+{
+  projectName: "Card Prediction System",
+  slug: "card-prediction-system",
+  image:
+    "https://res.cloudinary.com/dqfkbkx7k/image/upload/v1765539438/card_prication_dlxlv3.png",
+  category: ["ai"],
+  projectBrief:
+    "A smart card prediction engine that analyzes user behavior and predicts the products customers are most likely to buy, increasing e-commerce conversions.",
+  keyFeatures: [
+    "AI-based product prediction.",
+    "User behavior insights & analytics.",
+    "Dynamic product card ranking.",
+    "Real-time recommendation engine.",
+    "Admin dashboard for detailed analysis.",
+  ],
+  techStack: ["Next.js", "Node.js", "Express", "PostgreSQL", "TensorFlow.js"],
+  morePic: false,
+}
 ];
