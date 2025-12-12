@@ -35,7 +35,6 @@ function App() {
         <Route path="/company/about-us" element={<About />} />
         <Route path="/company/contact-us" element={<Contact />} />
         <Route path="/company/teams" element={<Team />} />
-        <Route path="/support/privacy-policy" element={<Privacy />} />
         <Route path="/industry/:field" element={<IndustryPage />} />
         <Route path="/support/privacy-policy" element={<Privacy />} />
         <Route path="/support/terms-and-conditions" element={<Terms />} />
