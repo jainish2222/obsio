@@ -25,8 +25,7 @@
     "react-router-dom": "^7.10.1",
     "react-window": "^2.2.3",
     "tailwindcss": "^4.1.17",
-    "three": "^0.181.2",
-    "tinycolor2": "^1.6.0"
+    "three": "^0.181.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
