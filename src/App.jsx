@@ -15,9 +15,9 @@ import Contact from "./components/company/contact/Contact";
 import IndustryPage from "./components/industries/IndustryPage";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
-import Privacy from "./components/support/privacy";
-import Terms from "./components/support/terms";
-import Refund from "./components/support/refund";
+import Privacy from "./components/support/Privacy";
+import Terms from "./components/support/Terms";
+import Refund from "./components/support/Refund";
 
 
 function App() {
