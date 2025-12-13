@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 // Memoized file display component
 const FileDisplay = memo(({ file }) => (
-  <span className="text-gray-300 text-sm truncate">{file ? file.name : "No file selected"}</span>
+  <span className="text-gray-300 text-sm truncate">
+    {file ? file.name : "No file selected"}
+  </span>
 ));
 
 // Memoized select options
@@ -17,6 +19,9 @@ const positionOptions = [
 
 const ApplyForm = () => {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -36,13 +41,70 @@ const ApplyForm = () => {
   }, []);
 
   const handleSubmit = useCallback(
-    (e) => {
+    async (e) => {
       e.preventDefault();
-      console.log("Form Submitted:", formData);
-      alert("Application submitted successfully!");
-      // You can also add API call logic here
+      if (isSubmitting) return;
+
+      // Frontend validation
+      if (
+        !formData.name.trim() ||
+        !formData.email.trim() ||
+        !formData.phone.trim() ||
+        !formData.position.trim() ||
+        !formData.coverLetter.trim() ||
+        !formData.resume
+      ) {
+        setError("Please fill out all fields and upload your resume.");
+        return;
+      }
+
+      setIsSubmitting(true);
+      setError("");
+      setSuccessMessage("");
+
+      try {
+        const payload = new FormData();
+        payload.append("name", formData.name);
+        payload.append("email", formData.email);
+        payload.append("phone", formData.phone);
+        payload.append("position", formData.position);
+        payload.append("coverLetter", formData.coverLetter);
+        payload.append("resume", formData.resume);
+
+        const res = await fetch(
+          "https://obsio-backend-resume.onrender.com/api/apply",
+          {
+            method: "POST",
+            body: payload,
+          }
+        );
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message || "Submission failed");
+        }
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          position: "",
+          coverLetter: "",
+          resume: null,
+        });
+
+        setSuccessMessage(
+          "Your resume has been submitted! We will get in touch with you soon."
+        );
+      } catch (error) {
+        console.error(error);
+        setError("Error submitting the form. Please try again later.");
+      } finally {
+        setIsSubmitting(false);
+      }
     },
-    [formData]
+    [formData, isSubmitting]
   );
 
   return (
@@ -56,7 +118,9 @@ const ApplyForm = () => {
           ← Back
         </button>
 
-        <h2 className="text-3xl font-bold mb-6 text-center">Apply for a Position</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center">
+          Apply for a Position
+        </h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Name */}
@@ -91,7 +155,9 @@ const ApplyForm = () => {
 
           {/* Position */}
           <div>
-            <label className="block mb-1 font-medium">Position Applying For</label>
+            <label className="block mb-1 font-medium">
+              Position Applying For
+            </label>
             <select
               name="position"
               required
@@ -110,7 +176,9 @@ const ApplyForm = () => {
 
           {/* Resume Upload */}
           <div>
-            <label className="block mb-1 font-medium">Upload Resume (PDF/DOC)</label>
+            <label className="block mb-1 font-medium">
+              Upload Resume (PDF/DOC)
+            </label>
             <div className="flex items-center gap-3 w-full bg-black/30 border border-gray-500 rounded-lg p-2">
               <label className="bg-white text-black px-4 py-2 rounded-md font-semibold cursor-pointer hover:bg-gray-200 transition">
                 Upload resume
@@ -140,13 +208,34 @@ const ApplyForm = () => {
               placeholder="Write a short cover letter..."
             ></textarea>
           </div>
+          {successMessage && (
+            <p className="text-green-500 font-medium text-center mb-2">
+              {successMessage}
+            </p>
+          )}
+          {error && (
+            <p className="text-red-500 font-medium text-center mb-2">{error}</p>
+          )}
 
           {/* Submit */}
           <button
             type="submit"
-            className="w-full py-3 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition"
+            disabled={isSubmitting}
+            className={`w-full py-3 font-bold rounded-lg transition flex items-center justify-center gap-2
+    ${
+      isSubmitting
+        ? "bg-gray-400 text-black cursor-not-allowed"
+        : "bg-white text-black hover:bg-gray-200"
+    }`}
           >
-            Submit Application
+            {isSubmitting ? (
+              <>
+                <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
+                Submitting...
+              </>
+            ) : (
+              "Submit Application"
+            )}
           </button>
         </form>
       </div>
@@ -155,19 +244,21 @@ const ApplyForm = () => {
 };
 
 // Reusable input field
-const InputField = memo(({ label, name, type, value, onChange, placeholder }) => (
-  <div>
-    <label className="block mb-1 font-medium">{label}</label>
-    <input
-      type={type}
-      name={name}
-      required
-      value={value}
-      onChange={onChange}
-      className="w-full p-3 rounded-lg bg-black/30 border border-gray-500 outline-none"
-      placeholder={placeholder}
-    />
-  </div>
-));
+const InputField = memo(
+  ({ label, name, type, value, onChange, placeholder }) => (
+    <div>
+      <label className="block mb-1 font-medium">{label}</label>
+      <input
+        type={type}
+        name={name}
+        required
+        value={value}
+        onChange={onChange}
+        className="w-full p-3 rounded-lg bg-black/30 border border-gray-500 outline-none"
+        placeholder={placeholder}
+      />
+    </div>
+  )
+);
 
 export default ApplyForm;
