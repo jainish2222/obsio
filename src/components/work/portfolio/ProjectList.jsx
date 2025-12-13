@@ -30,65 +30,65 @@ const PortfolioSection = () => {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
 
-  /** 🔥 CREATE STABLE REFS FOR CANVAS (NOT INSIDE MAP!) */
-  const projectCanvasRefs = useRef([]);
+  // /** 🔥 CREATE STABLE REFS FOR CANVAS (NOT INSIDE MAP!) */
+  // const projectCanvasRefs = useRef([]);
 
-  /** ------------------------------------------------------------------
-   *  ⭐ CANVAS ANIMATION (RUNS ONCE)
-   *  ------------------------------------------------------------------ */
-  useEffect(() => {
-    projectCanvasRefs.current.forEach((canvas) => {
-      if (!canvas) return;
+  // /** ------------------------------------------------------------------
+  //  *  ⭐ CANVAS ANIMATION (RUNS ONCE)
+  //  *  ------------------------------------------------------------------ */
+  // useEffect(() => {
+  //   projectCanvasRefs.current.forEach((canvas) => {
+  //     if (!canvas) return;
 
-      const ctx = canvas.getContext("2d");
-      const ratio = window.devicePixelRatio || 1;
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
+  //     const ctx = canvas.getContext("2d");
+  //     const ratio = window.devicePixelRatio || 1;
+  //     const w = canvas.clientWidth;
+  //     const h = canvas.clientHeight;
 
-      canvas.width = w * ratio;
-      canvas.height = h * ratio;
-      ctx.scale(ratio, ratio);
+  //     canvas.width = w * ratio;
+  //     canvas.height = h * ratio;
+  //     ctx.scale(ratio, ratio);
 
-      const stars = Array.from({ length: 20 }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        size: 0.8 + Math.random() * 1.6,
-        speed: 0.7 + Math.random() * 1.3,
-        opacity: 0.5 + Math.random() * 0.5,
-      }));
+  //     const stars = Array.from({ length: 20 }, () => ({
+  //       x: Math.random() * w,
+  //       y: Math.random() * h,
+  //       size: 0.8 + Math.random() * 1.6,
+  //       speed: 0.7 + Math.random() * 1.3,
+  //       opacity: 0.5 + Math.random() * 0.5,
+  //     }));
 
-      const drawStar = (s) => {
-        ctx.save();
-        ctx.globalAlpha = s.opacity;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = "white";
-        ctx.fillStyle = "white";
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      };
+  //     const drawStar = (s) => {
+  //       ctx.save();
+  //       ctx.globalAlpha = s.opacity;
+  //       ctx.shadowBlur = 8;
+  //       ctx.shadowColor = "white";
+  //       ctx.fillStyle = "white";
+  //       ctx.beginPath();
+  //       ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+  //       ctx.fill();
+  //       ctx.restore();
+  //     };
 
-      let animationId;
+  //     let animationId;
 
-      const animate = () => {
-        ctx.clearRect(0, 0, w, h);
-        stars.forEach((s) => {
-          drawStar(s);
-          s.y += s.speed;
-          if (s.y > h) {
-            s.y = -5;
-            s.x = Math.random() * w;
-          }
-        });
-        animationId = requestAnimationFrame(animate);
-      };
+  //     const animate = () => {
+  //       ctx.clearRect(0, 0, w, h);
+  //       stars.forEach((s) => {
+  //         drawStar(s);
+  //         s.y += s.speed;
+  //         if (s.y > h) {
+  //           s.y = -5;
+  //           s.x = Math.random() * w;
+  //         }
+  //       });
+  //       animationId = requestAnimationFrame(animate);
+  //     };
 
-      animate();
+  //     animate();
 
-      return () => cancelAnimationFrame(animationId);
-    });
-  }, []);
+  //     return () => cancelAnimationFrame(animationId);
+  //   });
+  // }, []);
 
   /** 🔥 MEMOIZED FILTERING - re-run only if activeTab changes */
   const filteredProjects = useMemo(() => {
@@ -200,10 +200,10 @@ const PortfolioSection = () => {
               className="relative flex flex-col md:flex-row-reverse items-center gap-8 bg-gradient-to-b from-[#0A0A0A] via-[#111] to-[#0A0A0A] p-6 sm:p-8 md:p-12 rounded-3xl shadow-2xl border border-white overflow-hidden"
             >
               {/* Canvas */}
-              <canvas
+              {/* <canvas
                 ref={(el) => (projectCanvasRefs.current[idx] = el)}
                 className="absolute inset-0 w-full h-full opacity-40 pointer-events-none"
-              />
+              /> */}
 
               {/* Project Image */}
               <div className="w-full md:w-1/2 flex justify-center z-10">
@@ -279,31 +279,33 @@ const PortfolioSection = () => {
           ))}
 
           {/* FULLSCREEN IMAGE MODAL */}
-          {selectedImage && (
-            <div
-              className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-              onClick={() => closeImage()} // Close when clicking outside
-            >
-              <div
-                className="relative"
-                onClick={(e) => e.stopPropagation()} // Prevent close when clicking the image
-              >
-                {/* Close Button */}
-                <button
-                  onClick={closeImage}
-                  className="absolute -top-12 -right-7 text-white text-3xl font-bold hover:text-red-500"
-                >
-                  &times;
-                </button>
+         {selectedImage && (
+  <div
+    className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/80 p-4"
+    onClick={closeImage}
+  >
+    <div
+      className="relative flex items-center justify-center"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Close Button */}
+      
 
-                <img
-                  src={selectedImage}
-                  alt="Fullscreen Project"
-                  className="max-h-full max-w-full rounded-3xl shadow-2xl"
-                />
-              </div>
-            </div>
-          )}
+      <img
+        src={selectedImage}
+        alt="Fullscreen Project"
+        className="
+          max-h-[85vh]
+          max-w-[90vw]
+          object-contain
+          rounded-2xl
+          shadow-xl
+        "
+      />
+    </div>
+  </div>
+)}
+
         </div>
       </div>
     </div>

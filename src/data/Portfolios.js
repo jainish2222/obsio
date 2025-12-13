@@ -184,7 +184,7 @@ export const projects = [
     "Smooth prototype interactions for demo flow.",
   ],
   techStack: ["Figma", "Auto Layout", "Components", "Prototype"],
-  morePic: true,
+  morePic: false,
 },
 {
   projectName: "Brixly Web Redesign",

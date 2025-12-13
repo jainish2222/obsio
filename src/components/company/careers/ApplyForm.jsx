@@ -216,7 +216,6 @@ const ApplyForm = () => {
           {error && (
             <p className="text-red-500 font-medium text-center mb-2">{error}</p>
           )}
-
           {/* Submit */}
           <button
             type="submit"
