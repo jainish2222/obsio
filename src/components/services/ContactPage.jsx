@@ -2,7 +2,8 @@ import React, { memo, useMemo, useCallback, useState } from "react";
 import Lottie from "lottie-react";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
-
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import AstroFloating from "../../data/Astro_Floating.json";
 import Meta_Universe from "../../data/Meta_Universe.json";
 
@@ -43,9 +44,6 @@ function ContactPage() {
   const location = useLocation();
   const showSpaceAnimation = location.pathname.includes("/company/");
 
-  // ---------------------------
-  // STATE
-  // ---------------------------
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -54,12 +52,16 @@ function ContactPage() {
     mobile: "",
     description: "",
   });
+
+  const [phoneMeta, setPhoneMeta] = useState({
+    countryName: null,
+    countryCode: null,
+    dialCode: null,
+  });
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
 
-  // ---------------------------
-  // MEMOIZED OPTIONS
-  // ---------------------------
   const budgetOptions = useMemo(
     () => [
       { value: "", label: "Select Budget" },
@@ -75,7 +77,10 @@ function ContactPage() {
   const techOptions = useMemo(
     () => [
       { label: "Frontend", options: ["React.js", "Next.js", "Vue.js", "Angular"] },
-      { label: "Backend", options: ["Node.js", "Express.js", "Django", "Java Spring Boot", "Laravel (PHP)"] },
+      {
+        label: "Backend",
+        options: ["Node.js", "Express.js", "Django", "Java Spring Boot", "Laravel (PHP)"],
+      },
       { label: "App Development", options: ["Flutter", "React Native", "iOS (Swift)", "Android (Kotlin)"] },
       { label: "UI/UX", options: ["Figma", "Adobe XD"] },
       { label: "AI / ML", options: ["OpenAI Integration", "Machine Learning (Python)", "TensorFlow"] },
@@ -85,45 +90,79 @@ function ContactPage() {
     []
   );
 
-  // ---------------------------
-  // HANDLERS
-  // ---------------------------
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }, []);
 
-  const handlePhoneInput = useCallback((e) => {
-    const sanitized = e.target.value.replace(/[^0-9+ ]/g, "").replace(/(?!^)\+/g, "");
-    setFormData((prev) => ({ ...prev, mobile: sanitized }));
+  const handlePhoneChange = useCallback((phone, country) => {
+    setFormData((prev) => ({ ...prev, mobile: phone }));
+    setPhoneMeta({
+      countryName: country?.name || null,
+      countryCode: country?.countryCode || null,
+      dialCode: country?.dialCode || null,
+    });
   }, []);
+
+  // Validates if phone number is more than just the country code
+  const isValidPhoneNumber = (phone, dialCode) => {
+    if (!phone) return false;
+    const cleaned = phone.replace(/\D/g, "");
+    return cleaned.length > (dialCode ? dialCode.replace(/\D/g, "").length : 0);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(null);
 
-    if (!formData.name || !formData.email) {
-      setMessage({ type: "error", text: "Name and Email are required." });
+    if (!formData.name.trim()) {
+      setMessage({ type: "error", text: "Name is required." });
       return;
     }
+
+    if (!formData.email.trim()) {
+      setMessage({ type: "error", text: "Email is required." });
+      return;
+    }
+
+    if (!isValidPhoneNumber(formData.mobile, phoneMeta.dialCode)) {
+      setMessage({ type: "error", text: "Please enter a valid mobile number (not just country code)." });
+      return;
+    }
+
+    const payload = {
+      name: formData.name.trim(),
+      email: formData.email.trim().toLowerCase(),
+      mobile: formData.mobile,
+      budget: formData.budget || null,
+      tech_stack: formData.techStack || null,
+      country_name: phoneMeta.countryName,
+      country_code: phoneMeta.countryCode,
+      dial_code: phoneMeta.dialCode,
+      description: formData.description?.trim() || null,
+      created_at: new Date().toISOString(),
+    };
 
     setLoading(true);
     try {
       const res = await fetch("https://onsio-contact-form-backend.onrender.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
-      const data = await res.json();
 
-      if (res.ok) {
-        setMessage({ type: "success", text: "Contact submitted successfully!" });
-        setFormData({ name: "", email: "", budget: "", techStack: "", mobile: "", description: "" });
-      } else {
-        setMessage({ type: "error", text: data.error || "Something went wrong." });
-      }
-    } catch (err) {
-      console.error(err);
+      if (!res.ok) throw new Error();
+      setMessage({ type: "success", text: "Contact submitted successfully!" });
+
+      setFormData({
+        name: "",
+        email: "",
+        budget: "",
+        techStack: "",
+        mobile: "",
+        description: "",
+      });
+    } catch {
       setMessage({ type: "error", text: "Server error. Try again later." });
     } finally {
       setLoading(false);
@@ -142,12 +181,11 @@ function ContactPage() {
       </motion.h2>
 
       <div className="flex flex-col lg:flex-row items-center justify-center gap-16 w-full">
-        {/* Animation */}
         <motion.div
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="w-[430px] h-[430px] lg:w-[520px] lg:h-[520px] flex items-center justify-center"
+          className="w-[430px] h-[430px] lg:w-[520px] lg:h-[520px]"
         >
           <Lottie
             animationData={showSpaceAnimation ? Meta_Universe : AstroFloating}
@@ -157,7 +195,6 @@ function ContactPage() {
           />
         </motion.div>
 
-        {/* Form */}
         <motion.form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 40 }}
@@ -165,99 +202,70 @@ function ContactPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="w-full max-w-xl space-y-6 text-white"
         >
-          {/* Row 1 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <TextInput
-              label="Name"
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-            />
-            <TextInput
-              label="Email"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-            />
+            <TextInput label="Name" name="name" value={formData.name} onChange={handleChange} required />
+            <TextInput label="Email" name="email" type="email" value={formData.email} onChange={handleChange} required />
           </div>
 
-          {/* Budget */}
-          <SelectInput
-            label="Budget (USD)"
-            name="budget"
-            value={formData.budget}
-            onChange={handleChange}
-          >
-            {budgetOptions.map((b, idx) => (
-              <option key={idx} value={b.value} className="bg-black text-white">
+          <SelectInput label="Budget (USD)" name="budget" value={formData.budget} onChange={handleChange}>
+            {budgetOptions.map((b) => (
+              <option key={b.value} value={b.value} className="bg-black">
                 {b.label}
               </option>
             ))}
           </SelectInput>
 
-          {/* Tech Stack */}
-          <SelectInput
-            label="Tech Stack"
-            name="techStack"
-            value={formData.techStack}
-            onChange={handleChange}
-          >
+          <SelectInput label="Tech Stack" name="techStack" value={formData.techStack} onChange={handleChange}>
             <option value="">Select Tech Stack</option>
-            {techOptions.map((group, idx) => (
-              <optgroup key={idx} label={`── ${group.label} ──`}>
-                {group.options.map((opt, i) => (
-                  <option key={i} value={opt.toLowerCase()} className="bg-black">
+            {techOptions.map((group) => (
+              <optgroup key={group.label} label={`── ${group.label} ──`}>
+                {group.options.map((opt) => (
+                  <option key={opt} value={opt.toLowerCase()} className="bg-black">
                     {opt}
                   </option>
                 ))}
               </optgroup>
             ))}
-            <option value="custom" className="bg-black font-semibold">
-              Custom Stack
-            </option>
           </SelectInput>
 
-          {/* Mobile */}
-          <TextInput
-            label="Mobile"
-            type="tel"
-            name="mobile"
-            placeholder="+1 415 555 2671"
-            maxLength={17}
-            value={formData.mobile}
-            onChange={handlePhoneInput}
-          />
-
-          {/* Description */}
           <div>
-            <label className="text-sm font-medium">Description</label>
-            <textarea
-              rows="4"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              className="w-full mt-2 p-3 rounded-lg bg-transparent border border-white/30 
-                focus:border-white outline-none resize-none"
-              placeholder="Tell us about your project..."
+            <label className="text-sm font-medium">Mobile</label>
+            <PhoneInput
+              country="us"
+              value={formData.mobile}
+              onChange={handlePhoneChange}
+              inputProps={{ required: true }}
+              inputStyle={{
+                width: "100%",
+                height: "3rem",
+                borderRadius: "0.5rem",
+                paddingLeft: "3.5rem",
+                border: "1px solid rgba(255,255,255,0.3)",
+                backgroundColor: "transparent",
+                color: "white",
+              }}
             />
           </div>
 
-          {/* Message */}
+          <textarea
+            rows="4"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            className="w-full p-3 rounded-lg bg-transparent border border-white/30"
+            placeholder="Tell us about your project (optional)"
+          />
+
           {message && (
-            <p className={`text-sm font-bold ${message.type === "success" ? "text-green-400" : "text-red-400"}`}>
+            <p className={message.type === "success" ? "text-green-400" : "text-red-400"}>
               {message.text}
             </p>
           )}
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-lg bg-white text-black font-bold hover:bg-gray-300 transition disabled:opacity-50"
+            className="w-full py-3 rounded-lg bg-white text-black font-bold"
           >
             {loading ? "Submitting..." : "Submit"}
           </button>
